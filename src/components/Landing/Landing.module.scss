@@ -2,3 +2,14 @@
 
 $primary-color: #ECFFED;
 $secondary-color: #2E7D32;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: none;
+}
+
+body {
+    background-color: $primary-color;
+    color: $secondary-color;
+}
