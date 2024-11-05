@@ -1,33 +1,41 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import * as React from 'react';
+import dayjs from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
+import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
+import { Landing } from './components/Landing/Landing';
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+     <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer
+        components={[
+          'TimePicker',
+          'MobileTimePicker',
+          'DesktopTimePicker',
+          'StaticTimePicker',
+        ]}
+      >
+        <DemoItem label="Desktop variant">
+          <DesktopTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+        <DemoItem label="Mobile variant">
+          <MobileTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+        <DemoItem label="Responsive variant">
+          <TimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+        <DemoItem label="Static variant">
+          <StaticTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+        </DemoItem>
+      </DemoContainer>
+    </LocalizationProvider>
     </>
   );
 }
