@@ -1,0 +1,12 @@
+.BoxStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .TextFieldStyle:focus {
+         
+    }
+    .ButtonStyle{
+        background-color: #2E7D32;
+    }
+}
