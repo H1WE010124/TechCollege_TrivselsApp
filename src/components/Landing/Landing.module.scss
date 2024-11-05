@@ -1,0 +1,29 @@
+$primary-color: #ECFFED;
+$secondary-color: #2E7D32;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: none;
+}
+
+body {
+    background-color: $primary-color;
+    color: $secondary-color;
+}
+
+.Admin {
+ top: 1rem;
+ left: 1rem;
+ background-color: $secondary-color;
+ color: white;
+
+}
+
+.Start {
+    background-color: $secondary-color;
+    color: white;
+    padding: 1rem;
+    margin: 1rem;
+    align-items: center;
+}
