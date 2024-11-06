@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import s from './Login.module.scss';
 import { usePost } from "../../hooks/usePost";
 import { useState } from 'react';
@@ -8,11 +9,20 @@ import { useState } from 'react';
 export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { data, isLoading, error } = usePost("http://localhost:5173/", {
-        username: 'admin',
-        password: 'Test1234!',
-        expiresInMins: 30,
-    })
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const { data, isLoading, error } = usePost("http://localhost:5173/");
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setErrorMessage('');
+
+        // tjek brugernavn og password, hvis fejler så setErrorMessage.
+        if (response?.error) {
+            setErrorMessage("Brugernavn eller Adgangkode er forkert");
+        }
+    };
+
     return (
         <section className={s.loginStyle}>
             <h2>Log ind som <span>admin</span></h2>
@@ -21,12 +31,15 @@ export const Login = () => {
                 className={s.container}
                 noValidate
                 autoComplete="off"
+                onSubmit={handleSubmit}
             >
                 <TextField
                     id="username"
                     label="Brugernavn"
                     variant="outlined"
                     size="medium"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     className={s.inputField}
                     sx={{
                         '& .MuiOutlinedInput-root': {
@@ -54,6 +67,8 @@ export const Login = () => {
                     label="Password"
                     type="password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className={s.inputField}
                     sx={{
                         '& .MuiOutlinedInput-root': {
@@ -88,6 +103,12 @@ export const Login = () => {
                 >
                     LOG IND
                 </Button>
+
+                {errorMessage && (
+                    <Typography color="error" sx={{ marginTop: 2 }}>
+                        {errorMessage}
+                    </Typography>
+                )}
             </Box>
         </section>
     );
