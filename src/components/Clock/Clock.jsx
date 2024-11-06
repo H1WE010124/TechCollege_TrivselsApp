@@ -1,25 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import styles from './Clock.module.scss';
-
-// export const Clock = () => {
-//   const [time, setTime] = useState(new Date());
-
-//   useEffect(() => {
-//     const intervalId = setInterval(() => {
-//       setTime(new Date());
-//     }, 60000); 
-
-//     return () => clearInterval(intervalId); 
-//   }, []);
-
-//   const formattedTime = `${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}`;
-
-//   return (
-//     <div className={styles.clock}>
-//       {formattedTime}
-//     </div>
-//   );
-// };
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
