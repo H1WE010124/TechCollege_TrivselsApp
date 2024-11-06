@@ -3,11 +3,14 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import s from './Login.module.scss';
 import { usePost } from "../../hooks/usePost";
+import { useState } from 'react';
 
 export const Login = () => {
-    const [data, isLoading, error] = usePost("", {
-        username: '',
-        password: '',
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const { data, isLoading, error } = usePost("http://localhost:5173/", {
+        username: 'admin',
+        password: 'Test1234!',
         expiresInMins: 30,
     })
     return (
@@ -74,6 +77,7 @@ export const Login = () => {
                 />
 
                 <Button
+                    type="submit"
                     variant="contained"
                     className={s.signInButton}
                     sx={{
