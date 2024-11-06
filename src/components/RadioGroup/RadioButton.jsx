@@ -10,8 +10,8 @@ export const RadioButton = ({amount, callback}) => {
 
   return (
     <RadioGroup
-    aria-labelledby="demo-radio-buttons-group-label"
-    defaultValue="female"
+    aria-labelledby="Radio buttons"
+    defaultValue={1}
     name="radio-buttons-group"
     onChange={callback}
   >
