@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react'
 import { Button, TextField, Container, Box, Typography } from '@mui/material'
 import s from '../Admin_Login_Page/AdminLoginPage.module.scss'
 
@@ -33,10 +33,10 @@ export const AdminLoginPage = () => {
         navigate('/statistics'); 
       } else {
         const errorData = await response.json();
-        setError(errorData.message || 'Login mislykkedes. Prøv venligst igen.');
+        setError(errorData.message || 'Login mislykkedes. Prøv igen.');
       }
     } catch (err) {
-      setError('Der opstod en fejl. Prøv venligst igen senere.');
+      setError('Der opstod en fejl. Prøv igen senere.');
     }
   }
 
