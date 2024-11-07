@@ -1,0 +1,60 @@
+// Farvevariabler
+$success-bg: #ECFFED;
+$success-main: var(--success-main, #2E7D32);
+
+// Generel styling for hovedstrukturen
+.statusPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: 1rem;
+
+  // Til mobilvisning, sørger for centrering og passende afstand
+  .message {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: $success-bg;
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 90%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    &.successMessage {
+      color: $success-main;
+    }
+
+    &.errorMessage {
+      color: red;
+      background-color: #FFEBEE;
+    }
+
+    .button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #ECFFED;
+      background-color: #2E7D32;
+      ;
+      border: none;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: #7878789d;
+      }
+    }
+  }
+}
+
+// Desktop-tilpasninger
+@media (min-width: 768px) {
+  .statusPage {
+    .message {
+      max-width: 600px;
+      padding: 3rem;
+      gap: 1.5rem;
+    }
+  }
+}
