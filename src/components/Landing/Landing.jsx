@@ -1,4 +1,5 @@
 import { Clock } from '../Clock/Clock';
+import { Question } from '../Question/Question';
 import styles from './Landing.module.scss';
 
 export function Landing() {
@@ -9,11 +10,14 @@ export function Landing() {
       <button>Admin</button>
      </div>
 
-    <Clock></Clock>
-
-     <div className={styles.Start}>
-      <button>Start &gt;</button>
+     <div className={styles.ClockAndStart}>
+      <div>
+      <Clock />
+      </div>
+     <button>Start &gt;</button>
+     <Question />
      </div>
+    
     
 
     </>
