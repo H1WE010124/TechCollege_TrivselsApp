@@ -10,18 +10,7 @@ function App() {
   
   return (
     <>
-     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer
-
-        components={[
-          'MobileTimePicker'
-        ]}
-      >
-        <DemoItem label="Mobile variant">
-          <MobileTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-        </DemoItem>
-      </DemoContainer>
-    </LocalizationProvider>
+     <Landing />
     </>
   );
 }
