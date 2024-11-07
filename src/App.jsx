@@ -1,11 +1,15 @@
-import NativeSelectDemo from './components/Select/Select'
+import React from 'react';
+import {CustomSelect} from './components/Select/Select'
+import { Options } from './components/Select/Options';
 
-function App() {
+
+
+const App = () => {
+ 
+
   return (
-
-    <NativeSelectDemo />
-    
+    <Options />
   );
-}
+};
 
 export default App;

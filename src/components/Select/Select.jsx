@@ -1,56 +1,35 @@
-import React, { useState } from 'react';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import React from 'react';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import style from './Select.module.scss';
 
-const potions = [
-  { id: 1, name: '8A' },
-  { id: 2, name: '8B' },
-  { id: 3, name: '8C' }
-];
+export const CustomSelect = ({ OptionsArray, callback, defaultText }) => {
+  const [selectedValue, setSelectedValue] = React.useState('');
 
-function PotionForm() {
-  const [selectedPotion, setSelectedPotion] = useState('');
-
-  const handleSelectChange = (event) => {
-    const selectedPotionName = event.target.value;
-    setSelectedPotion(selectedPotionName);
-    console.log(`Selected: ${selectedPotionName}`);
-
-    // Call a specific function based on the selected option
-    if (selectedPotionName === '8A') {
-      heal();
-    } else if (selectedPotionName === '8B') {
-      becomeInvisible();
-    } else if (selectedPotionName === '8C') {
-      gainStrength();
-    }
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setSelectedValue(value);
+    callback(value); 
   };
 
-  // Functions for each potion action
-  const heal = () => console.log("8A!");
-  const becomeInvisible = () => console.log("8B");
-  const gainStrength = () => console.log("8C");
-
   return (
-    <FormControl fullWidth variant="outlined">
-      <InputLabel id="potion-select-label">Klasse</InputLabel>
-      <Select
-        labelId="potion-select-label"
-        id="potion-select"
-        value={selectedPotion}
-        onChange={handleSelectChange}
-        label="Klasse"
+    <FormControl fullWidth className={style.select} >
+      <InputLabel>{defaultText}</InputLabel>
+      <Select className={style.celector}
+        value={selectedValue}
+        onChange={handleChange}
+        displayEmpty
+        renderValue={(selected) => (selected ? selected : defaultText)}
       >
-        <MenuItem value="">
-          <em>Klasse</em>
+        <MenuItem value="" disabled>
+          {defaultText}
         </MenuItem>
-        {potions.map((potion) => (
-          <MenuItem key={potion.id} value={potion.name}>
-            {potion.name}
+        {OptionsArray.map((option, index) => (
+          <MenuItem key={index} value={option}>
+            {option}
           </MenuItem>
         ))}
       </Select>
     </FormControl>
   );
-}
+};
 
-export default PotionForm;
