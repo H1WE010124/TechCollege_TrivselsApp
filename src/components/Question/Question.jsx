@@ -1,8 +1,4 @@
-import React, { useState } from 'react';
-import styles from './Question.module.scss';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import Box from "@mui/material/Box";
 
 export const Question = ({ callback, question }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -13,28 +9,34 @@ export const Question = ({ callback, question }) => {
   };
 
   return (
-    <div className={styles.question}>
+    <Box className={styles.question}>
       <h2>{question}</h2>
-      <div className={styles.options}>
-        <div
+      <Box className={styles.options}>
+        <Box
           onClick={() => handleAnswer(1)}
-          className={`${styles.icon} ${selectedAnswer === 1 ? styles.selected : ''}`}
+          className={`${styles.icon} ${
+            selectedAnswer === 1 ? styles.selected : ""
+          }`}
         >
           <SentimentVeryDissatisfiedIcon />
-        </div>
-        <div
+        </Box>
+        <Box
           onClick={() => handleAnswer(2)}
-          className={`${styles.icon} ${selectedAnswer === 2 ? styles.selected : ''}`}
+          className={`${styles.icon} ${
+            selectedAnswer === 2 ? styles.selected : ""
+          }`}
         >
           <SentimentNeutralIcon />
-        </div>
-        <div
+        </Box>
+        <Box
           onClick={() => handleAnswer(3)}
-          className={`${styles.icon} ${selectedAnswer === 3 ? styles.selected : ''}`}
+          className={`${styles.icon} ${
+            selectedAnswer === 3 ? styles.selected : ""
+          }`}
         >
           <SentimentVerySatisfiedIcon />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
