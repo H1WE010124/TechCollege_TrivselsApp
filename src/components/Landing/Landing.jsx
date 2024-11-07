@@ -23,7 +23,7 @@ export function Landing() {
     return (
         <div className={styles.container}>
           <div className={styles.AdminText}>
-            <h2>Admin</h2>
+           <button>Admin</button>
             </div>
             <div className={styles.clock}>{time}</div>
             <button onClick={handleStart} className={styles.button}>
