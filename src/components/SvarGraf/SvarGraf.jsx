@@ -11,14 +11,14 @@ import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfi
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 export const SvarGraf = ({ spørgsmål }) => {
-    // Data, der skal vises i søjlediagrammet
+    // Data, der skal vises i søjlediagrammett
     const testData = [
         { label: 'Dårlig', count: 10, icon: <SentimentVeryDissatisfiedIcon style={{ color: '#388e3c' }} /> },
         { label: 'Okay', count: 20, icon: <SentimentNeutralIcon style={{ color: '#388e3c' }} /> },
         { label: 'God', count: 30, icon: <SentimentVerySatisfiedIcon style={{ color: '#388e3c' }} /> },
     ];
 
-    // Brugertilstand til at holde styr på, hvilke kommentarer der er åbne
+    // Brugertilstand til at holde styr på, hvilke kommentarer der er åbner
     const [expandedIndexes, setExpandedIndexes] = useState([]);
 
     // Dataopsætning til søjlediagrammet
