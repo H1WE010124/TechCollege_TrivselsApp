@@ -3,7 +3,7 @@ import styles from './Landing.module.scss';
 
 export function Landing() {
     const [time, setTime] = useState("00:00");
-    const [isRunning, setIsRunning] = useState(false);
+    const [isRunning, setIsRunning] = useState(true);
 
     useEffect(() => {
         let timer;
