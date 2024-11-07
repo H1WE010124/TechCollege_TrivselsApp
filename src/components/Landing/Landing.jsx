@@ -1,6 +1,6 @@
 import { Clock } from '../Clock/Clock';
-import { Question } from '../Question/Question';
 import styles from './Landing.module.scss';
+import {NavLink} from 'react-router-dom';
 
 export function Landing() {
   return (
@@ -14,11 +14,8 @@ export function Landing() {
       <div>
       <Clock />
       </div>
-     <button>Start &gt;</button>
-     <Question />
+     <NavLink to={'/'}>Start &gt;</NavLink>
      </div>
-    
-    
 
     </>
   );
