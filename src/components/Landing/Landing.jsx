@@ -6,16 +6,16 @@ export function Landing() {
   return (
     <>
 
-     <div className={styles.Admin}>
+     <Box className={styles.Admin}>
       <button>Admin</button>
-     </div>
+     </Box>
 
-     <div className={styles.ClockAndStart}>
-      <div>
+     <Box className={styles.ClockAndStart}>
+      <Box>
       <Clock />
-      </div>
+      </Box>
      <NavLink to={'/'}>Start &gt;</NavLink>
-     </div>
+     </Box>
 
     </>
   );
