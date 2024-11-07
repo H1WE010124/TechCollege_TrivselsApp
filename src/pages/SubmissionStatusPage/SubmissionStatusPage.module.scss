@@ -1,0 +1,60 @@
+$success-bg: #ECFFED; 
+$success-main: #2E7D32; 
+$error-bg: #FFEBEE;
+$error-main: #D32F2F; 
+$hover-bg: rgba(0, 0, 0, 0.38); 
+$button-hover: rgba(46, 125, 50, 0.4); 
+
+.statusPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: 1rem;
+
+  .message {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: $success-bg;
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 90%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    &.successMessage {
+      color: $success-main; 
+    }
+
+    &.errorMessage {
+      color: $error-main; 
+      background-color: $error-bg; 
+    }
+
+    .button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #FFFFFF; 
+      background-color: $success-main; 
+      border: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $button-hover; 
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .statusPage {
+    .message {
+      max-width: 600px;
+      padding: 3rem;
+      gap: 1.5rem;
+    }
+  }
+}
