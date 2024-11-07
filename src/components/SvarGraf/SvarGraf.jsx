@@ -93,13 +93,9 @@ export const SvarGraf = ({ spørgsmål }) => {
     );
 };
 
-// Validering af komponentens prop-typer
+// Validering af komponentens prop-typerr
 SvarGraf.propTypes = {
     spørgsmål: PropTypes.string.isRequired, 
 };
 
 
-// til app.jsx
-{/* <div className="App">
-<SvarGraf spørgsmål="Hvordan har dagen været?" />
-</div> */}
