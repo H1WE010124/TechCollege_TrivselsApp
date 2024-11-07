@@ -1,15 +1,24 @@
 import React from 'react'
-import { createContext } from 'react'
+import { createContext, useState, useContext } from 'react'
 
-export const UserContext = createContext()
+//Create context
+const UserContext = createContext()
 
-export const UserProvider = ({children} => {
-    const [token, setToken] = useSTate(null)
+//Custom hook for easy access
+export const useUser = () => useContext(UserContext)
 
-  return (
-    <UserContext.Provider value = {{token, setToken}}>
-        {children}
-    </UserContext.Provider>
-    
-  )
+export const UserProvider = ({children}) =>{
+  const [token, setToken] = useState(null)
+
+
+//Function to update token
+ const login = (token) =>{
+  setToken(token)
+ }
+
+ return (
+  <UserContext.Provider value = {{token, login}}>
+    {children}
+  </UserContext.Provider>
+ )
 }

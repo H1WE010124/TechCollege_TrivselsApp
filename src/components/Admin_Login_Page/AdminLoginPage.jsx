@@ -1,15 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, TextField, Container, Box, Typography } from '@mui/material'
 import s from '../Admin_Login_Page/AdminLoginPage.module.scss'
+import { useNavigate } from 'react-router-dom'
+import { useUser } from '../UserContext/UserContext'
 
 export const AdminLoginPage = () => {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
-
-
+  //const navigate = useNavigate()
+  const {login} = useUser()// Get the login function from context
  
-  async function handleSubmit(e) {
+  const handleSubmit= async (e) => {
     e.preventDefault()
     setError(null)
 
@@ -22,14 +24,17 @@ export const AdminLoginPage = () => {
       // Send a POST request to the backend with the login details
       const response = await fetch('/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: user, password: password }),
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ user, password }),
       });
+    if (!response.ok){
+      throw new Error('Login mislykkedes. Prøv igen.')
+    }
+
 
       if (response.ok) {
         const data = await response.json();
+        login(data.token) // Save token in UserContext
         navigate('/statistics'); 
       } else {
         const errorData = await response.json();
