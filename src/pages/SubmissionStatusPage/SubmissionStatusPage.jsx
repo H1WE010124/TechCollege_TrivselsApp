@@ -1,37 +1,35 @@
-import React, { useState } from "react";
-import styles from "./SubmissionStatusPage.module.scss"; // Import af CSS-modul
+import { useState } from "react";
+import styles from "./SubmissionStatusPage.module.scss";
 
 export const SubmissionStatusPage = () => {
-  const [status, setStatus] = useState(null); // null, "success" eller "error"
+  const [status, setStatus] = useState(null);
 
   // Funktion til at simulere formularindsendelse
   const handleSubmit = async () => {
-    console.log("Submitting form..."); // Log indsendelse
     try {
-      // Simuler en serverrespons (brug fetch i virkeligheden)
-      const response = { ok: true }; // Skift til false for at teste fejlbeskeden
+      // Tilfældigt respons for at simulere både succes og fejl
+      const response = { ok: Math.random() > 0.5 };
 
       if (response.ok) {
         setStatus("success");
-        console.log("Submission successful"); // Log success
       } else {
         setStatus("error");
-        console.log("Submission failed"); // Log fejl
       }
     } catch (error) {
       setStatus("error");
-      console.log("An error occurred during submission"); // Log fejl i catch
     }
   };
 
+  // Funktion til at prøve indsendelse igen efter en fejl
   const handleRetry = () => {
-    console.log("Retrying submission..."); // Log retry
-    setStatus(null); // Nulstil status og prøv igen
-    handleSubmit();  // Forsøg igen
+    console.log("Retrying submission...");
+    setStatus(null);
+    handleSubmit();
   };
 
   return (
     <main className={styles.statusPage}>
+      {/* Viser succesbesked hvis status er "success" */}
       {status === "success" && (
         <section className={`${styles.message} ${styles.successMessage}`}>
           <h1>Tak for din deltagelse!</h1>
@@ -41,6 +39,8 @@ export const SubmissionStatusPage = () => {
           </button>
         </section>
       )}
+
+      {/* Viser fejlbesked hvis status er "error" */}
       {status === "error" && (
         <section className={`${styles.message} ${styles.errorMessage}`}>
           <h1>Ups! Noget gik galt</h1>
@@ -53,5 +53,4 @@ export const SubmissionStatusPage = () => {
     </main>
   );
 };
-
 

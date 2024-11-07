@@ -1,8 +1,10 @@
-// Farvevariabler
-$success-bg: #ECFFED;
-$success-main: var(--success-main, #2E7D32);
+$success-bg: #ECFFED; 
+$success-main: #2E7D32; 
+$error-bg: #FFEBEE;
+$error-main: #D32F2F; 
+$hover-bg: rgba(0, 0, 0, 0.38); 
+$button-hover: rgba(46, 125, 50, 0.4); 
 
-// Generel styling for hovedstrukturen
 .statusPage {
   display: flex;
   justify-content: center;
@@ -11,7 +13,6 @@ $success-main: var(--success-main, #2E7D32);
   text-align: center;
   padding: 1rem;
 
-  // Til mobilvisning, sørger for centrering og passende afstand
   .message {
     display: flex;
     flex-direction: column;
@@ -23,32 +24,31 @@ $success-main: var(--success-main, #2E7D32);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
     &.successMessage {
-      color: $success-main;
+      color: $success-main; 
     }
 
     &.errorMessage {
-      color: red;
-      background-color: #FFEBEE;
+      color: $error-main; 
+      background-color: $error-bg; 
     }
 
     .button {
       padding: 0.5rem 1rem;
       font-size: 1rem;
       cursor: pointer;
-      color: #ECFFED;
-      background-color: #2E7D32;
-      ;
+      color: #FFFFFF; 
+      background-color: $success-main; 
       border: none;
       border-radius: 4px;
+      transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #7878789d;
+        background-color: $button-hover; 
       }
     }
   }
 }
 
-// Desktop-tilpasninger
 @media (min-width: 768px) {
   .statusPage {
     .message {
