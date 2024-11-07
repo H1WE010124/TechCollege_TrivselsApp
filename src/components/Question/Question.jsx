@@ -1,3 +1,8 @@
+import React, { useState } from "react";
+import styles from "./Question.module.scss";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
+import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import Box from "@mui/material/Box";
 
 export const Question = ({ callback, question }) => {
