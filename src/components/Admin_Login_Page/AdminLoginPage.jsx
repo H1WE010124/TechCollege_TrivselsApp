@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { Button, TextField, Container, Box, Typography } from '@mui/material'
 import s from '../Admin_Login_Page/AdminLoginPage.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { useUser } from '../UserContext/UserContext'
+
 
 export const AdminLoginPage = () => {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   //const navigate = useNavigate()
-  const {login} = useUser()// Get the login function from context
+  //const {login} = useUser()// Get the login function from context
  
   const handleSubmit= async (e) => {
     e.preventDefault()
