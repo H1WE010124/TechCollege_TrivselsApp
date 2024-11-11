@@ -2,9 +2,8 @@ const staticCache = 'static-cache-v1';
 const dynamicCacheName = 'dynamic-cache-v1';
 
 const assets = [
-    '/',            
     '/index.html',
-    '/fallback.html',  
+    '/fallback.html',
 ];
 
 // Installations-event: Tilføj statiske assets til cache
