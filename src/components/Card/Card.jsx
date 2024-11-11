@@ -1,16 +1,20 @@
-import { Card as MUICard } from "@mui/material/Card";
+import { Card } from "@mui/material";
 import s from "./Card.module.scss";
 import { Typography } from "@mui/material";
 
-export const Card = ({ children, currentQuestionIndex, totalQuestions }) => {
+export const QuestionCard = ({
+  children,
+  currentQuestionIndex,
+  totalQuestions,
+}) => {
   return (
-    <MUICard classname={s.card}>
-      <div classname={s.progress}>
+    <Card className={s.card}>
+      <div className={s.progress}>
         <Typography>
           {currentQuestionIndex + 1}/{totalQuestions}
         </Typography>
       </div>
-      <div classname={s.content}>{children}</div>
-    </MUICard>
+      <div className={s.content}>{children}</div>
+    </Card>
   );
 };
