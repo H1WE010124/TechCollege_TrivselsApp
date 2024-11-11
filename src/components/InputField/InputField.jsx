@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
 
-export const inputField = ({ placeholder, callback, type, label, value }) => {
+export const InputField = ({ placeholder, callback, type, label, value }) => {
   return (
     <TextField
       placeholder={placeholder}
