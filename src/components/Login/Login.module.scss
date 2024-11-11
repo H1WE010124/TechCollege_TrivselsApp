@@ -1,0 +1,40 @@
+.loginStyle {
+    h2{
+        color: #2E7D32;
+        font-size: 40px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 400;
+        text-align: center;
+        span{
+            font-weight: 700;
+        }
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+        padding: 24px;
+        background-color: transparent;
+        border-radius: 8px;
+        width: 300px;
+        margin: auto;
+
+
+        .inputField {
+            width: 100%;
+        }
+
+        .signInButton {
+            background-color: #2E7D32;
+            color: #fff;
+            width: 104px;
+            height: 42px;
+            align-self: center;
+
+            &:hover {
+                background-color: #2E7D32;
+            }
+        }
+    }
+}
