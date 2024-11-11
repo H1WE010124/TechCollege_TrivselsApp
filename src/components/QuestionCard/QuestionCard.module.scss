@@ -1,20 +1,10 @@
 .card {
-  position: relative;
-  background-color: #2e7d32 !important;
   padding: 1rem;
-  min-width: 5rem;
-  min-height: 5rem;
-  color: #ecffed !important;
+  width: 80vw;
+  height: 50vh;
   text-align: center;
+  
   .progress {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-  .content {
-    position: absolute;
-    right: 0;
-    bottom: 1rem;
-    left: 0;
+    text-align: right;
   }
 }

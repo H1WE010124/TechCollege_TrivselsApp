@@ -8,7 +8,7 @@ export const QuestionCard = ({
   totalQuestions,
 }) => {
   return (
-    <Card className={s.card}>
+    <Card className={s.card} sx={{color: '#ecffed', backgroundColor: '#2e7d32'}}>
       <div className={s.progress}>
         <Typography>
           {currentQuestionIndex + 1}/{totalQuestions}
