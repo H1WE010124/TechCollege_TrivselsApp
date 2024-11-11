@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import style from './SwipeCard.module.scss'
 import TinderCard from 'react-tinder-card'
-import {Card} from '../Card/Card'
+import {QuestionCard} from '../QuestionCard/QuestionCard'
 import {YesNo} from '../YesNo/YesNo'
 
 export const SwipeCard = () => {
@@ -12,9 +12,9 @@ export const SwipeCard = () => {
 {isDesktop && (
     <div>
         {cards.map((item) => {
-            <Card currentQuestionIndex={item.id - 1} totalQuestions={cards.length}>
+            <QuestionCard currentQuestionIndex={item.id - 1} totalQuestions={cards.length}>
                 <YesNo></YesNo>
-            </Card>
+            </QuestionCard>
         })}
     </div>
 )}

@@ -1,5 +1,5 @@
 import { Card } from "@mui/material";
-import s from "./Card.module.scss";
+import s from "./QuestionCard.module.scss";
 import { Typography } from "@mui/material";
 
 export const QuestionCard = ({
