@@ -62,9 +62,9 @@ function App() {
       <CssBaseline  enableColorScheme />
       <Button onClick={() => setLight((prev) => !prev)}
       variant="contained">Theme</Button>
-      <Typography variant='poster'>      <Clock />      </Typography>
+      <Typography variant='poster'>         </Typography>
       <Paper elevation={5}><Question /></Paper>
-      <QuestionStepper />
+     
       
       {/* <Button onClick={() => console.log('you clicked me')}
       variant="contained">Theme</Button> */}
