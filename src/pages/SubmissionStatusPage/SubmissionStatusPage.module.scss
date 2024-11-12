@@ -49,12 +49,25 @@ $button-hover: rgba(46, 125, 50, 0.4);
   }
 }
 
-@media (min-width: 768px) {
+
+@media (max-width: 767px) {
   .statusPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+
     .message {
-      max-width: 600px;
-      padding: 3rem;
-      gap: 1.5rem;
+      max-width: 90%;
+      padding: 2rem;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .errorMessage {
+      background-color: $error-bg;
+      color: $error-main;
     }
   }
 }
+
