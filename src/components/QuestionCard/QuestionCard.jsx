@@ -13,7 +13,7 @@ export const QuestionCard = ({
       sx={{ color: "#ecffed", backgroundColor: "#2e7d32" }}
     >
       <div className={s.progress}>
-        <Typography>
+        <Typography sx={{fontSize: '1.5rem'}}>
           {currentQuestionIndex + 1}/{totalQuestions}
         </Typography>
       </div>
