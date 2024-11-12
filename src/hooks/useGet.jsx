@@ -1,22 +1,22 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "../lib/supabaseClient";
 
-export const useGet = (url) => {
-    const { data, isLoading, error } = useQuery({
-        queryKey: [url],
-        queryFn: async () => {
-            const res  = await fetch(url);
+export const useGet = (table) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: [table + "_key"],
+    queryFn: async () => {
+      const { data, isLoading, error } = await supabase.from(table).select();
 
-            if (!res.ok) {
-                throw new Error(`Error ${res.status}: ${res.statusText}`);
-            }
-            
-            const data = await res.json();
-            return data;
-        },
-        staleTime: 600 * 10, //data is fresh for 1 minute,
-        cacheTime: 3000 * 10, //In cache for 5 minutes
-        retry: 1, //Retry fetch once if fail on the first fetch
-    });
+      if (error) {
+        throw new Error(`Error ${error}`);
+      }
 
-    return { data, isLoading, error }
-}
+      return data;
+    },
+    staleTime: 600 * 10, //data is fresh for 1 minute,
+    cacheTime: 3000 * 10, //In cache for 5 minutes
+    retry: 1, //Retry fetch once if fail on the first fetch
+  });
+
+  return { data, isLoading, error };
+};

@@ -48,6 +48,8 @@ const themeDark = createTheme({
     }
   }
 });
+import RouterComponent from "./router/Router";
+import routes from "./router/routes";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -64,8 +66,11 @@ function App() {
       <Typography variant='poster'>         </Typography>
       <Paper elevation={5}><Question /></Paper>
       </ThemeProvider>
+      <RouterComponent routeArray={routes} />
       </>
+    
   );
 }
 
 export default App;
+
