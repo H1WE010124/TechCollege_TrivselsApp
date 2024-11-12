@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 // Øster Uttrupvej 1 coordinates: 57.04803988970455, 9.967484255107353
+// Rørdalsvej 10 coordinates: 57.05154405572509, 9.964011560095193
+// Struervej 70 coordinates: 57.03787121681349, 9.982158276731335
 
 export const LocationCheck = () => {
-    const targetLatitude = 57.04803988970455;
-    const targetLongitude = 9.967484255107353;
-    const radius = 500; // Radius in meters (500 meters)
+    const locations = [
+        { latitude: 57.04803988970455, longitude: 9.967484255107353, name: "Øster Uttrupvej 1" },
+        { latitude: 57.05154405572509, longitude: 9.964011560095193, name: "Rørdalsvej 10" },
+        { latitude: 57.03787121681349, longitude: 9.982158276731335, name: "Struervej 70" },
+    ];
+    const radius = 500; // sætter radius på meters (500 meters)
 
     // calculate the distance between two geographic points
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -22,13 +27,21 @@ export const LocationCheck = () => {
         return R * c; // Distance in meters
     };
 
-    // tjek brugers lokation
+    // tjek brugers location
     const success = (position) => {
         const { latitude, longitude } = position.coords;
-        const distance = calculateDistance(latitude, longitude, targetLatitude, targetLongitude);
-        if (distance <= radius) {
-            console.log("LOCATION OK?", true);
-        } else {
+        let locationFound = false;
+
+        for (const location of locations) {
+            const distance = calculateDistance(latitude, longitude, location.latitude, location.longitude);
+            if (distance <= radius) {
+                console.log(`LOCATION OK? (${location.name}):`, true);
+                locationFound = true;
+                break;
+            }
+        }
+
+        if (!locationFound) {
             console.log("LOCATION OK?", false);
         }
     };
@@ -37,7 +50,7 @@ export const LocationCheck = () => {
         console.log("Unable to retrieve location.");
     };
 
-    // Request the user's location
+    // request user's location
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(success, error);
