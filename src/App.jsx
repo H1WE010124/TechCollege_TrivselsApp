@@ -52,8 +52,6 @@ const themeDark = createTheme({
     },
   },
 });
-import RouterComponent from "./router/Router";
-import routes from "./router/routes";
 
 function App() {
   const [light, setLight] = useState(true);
@@ -66,7 +64,6 @@ function App() {
         <CssBaseline enableColorScheme />
         <RouterComponent routeArray={routes} />
       </ThemeProvider>
-      <RouterComponent routeArray={routes} />
     </>
   );
 }

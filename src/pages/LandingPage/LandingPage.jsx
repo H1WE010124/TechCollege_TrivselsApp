@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { AppButton } from "../../components/AppButton/AppButton";
 
-export function Landing() {
+export function LandingPage() {
   return (
     <>
       <Box className={styles.Admin}>

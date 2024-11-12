@@ -1,26 +1,26 @@
 // routes.js
-import { Admin } from "../pages/Admin";
-import { Landing } from "../pages/Landing/Landing";
-import { Login } from "../pages/login";
-import HomePage from "./../pages/HomePage";
+import { AdminPage } from "../pages/AdminPage/AdminPage";
+import { AdminLoginPage } from "../pages/AdminLoginPage/AdminLoginPage";
+import { LandingPage } from "../pages/LandingPage/LandingPage";
+import { QuestionPage } from "../pages/QuestionPage/QuestionPage";
 
 const routes = [
   {
-    path: "/",
-    component: Landing,
     exact: true,
+    index: true,
+    component: LandingPage,
   },
   {
     path: "/admin",
-    component: Admin,
+    component: AdminPage,
   },
   {
     path: "/login",
-    component: Login,
+    component: AdminLoginPage,
   },
   {
     path: "/start",
-    component: Login,
+    component: QuestionPage,
   },
 ];
 
