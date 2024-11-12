@@ -38,7 +38,7 @@ export const QuestionPage = () => {
         setCurrentStep={setCurrentIndex}
         backAction={handleAnswerBack}
       />
-
+      {}
       <div>
         <p>{questionArray[currentIndex].quesiton}</p>
         <button
