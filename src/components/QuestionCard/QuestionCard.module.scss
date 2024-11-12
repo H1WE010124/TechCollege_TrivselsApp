@@ -3,8 +3,25 @@
   width: 80vw;
   height: 50vh;
   text-align: center;
-  
+  display: flex;
+
+
   .progress {
     text-align: right;
+  }
+
+  .content{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+    p{
+      justify-self: start;
+    }
+  }
+
+  .content:nth-child(2){
+    justify-content: end;
   }
 }
