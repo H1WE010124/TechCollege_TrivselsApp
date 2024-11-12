@@ -7,7 +7,6 @@ export const SubmissionStatusPage = () => {
   // Funktion til at simulere formularindsendelse
   const handleSubmit = async () => {
     try {
-      // Tilfældigt respons for at simulere både succes og fejl
       const response = { ok: Math.random() > 0.5 };
 
       if (response.ok) {
@@ -22,7 +21,6 @@ export const SubmissionStatusPage = () => {
 
   // Funktion til at prøve indsendelse igen efter en fejl
   const handleRetry = () => {
-    console.log("Retrying submission...");
     setStatus(null);
     handleSubmit();
   };
@@ -53,4 +51,3 @@ export const SubmissionStatusPage = () => {
     </main>
   );
 };
-
