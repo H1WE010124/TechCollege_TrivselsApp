@@ -13,7 +13,6 @@ import { QuestionStepper } from "./components/QuestionStepper/QuestionStepper";
 import { Question } from "./components/Question/Question";
 import { Clock } from "./components/Clock/Clock";
 
-
 const themeLight = createTheme({
   palette: {
     primary: {

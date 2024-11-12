@@ -2,6 +2,7 @@
 import { Admin } from '../pages/Admin';
 import { Login } from '../pages/login';
 import HomePage from './../pages/HomePage';  
+import {Charts} from './../pages/Chart';
 
 const routes = [
     {
@@ -16,6 +17,10 @@ const routes = [
     {
       path: '/login',
       component: Login,
+    },
+    {
+      path: '/Chart',
+      component: Charts,
     },
   ];
   
