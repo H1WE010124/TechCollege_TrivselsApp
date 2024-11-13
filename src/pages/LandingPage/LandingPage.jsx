@@ -3,10 +3,34 @@ import styles from "./Landing.module.scss";
 import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { AppButton } from "../../components/AppButton/AppButton";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 
 export function LandingPage() {
+  const [showStartButton, setShowStartButton] = useState(false);
+
+  // tjek om klok er mellem 12:00 and 14:00
+  const checkTimeRange = () => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+
+    //12:00 - 12:59
+    const isAfterStart = hours > 12 || (hours === 12 && minutes >= 0);
+    //13:00 - 13:59
+    const isBeforeEnd = hours < 14 || (hours === 13 && minutes <= 59);
+
+    return isAfterStart && isBeforeEnd;
+  };
+
+  useEffect(() => {
+    const updateButtonVisibility = () => setShowStartButton(checkTimeRange());
+    updateButtonVisibility();
+
+    const intervalId = setInterval(updateButtonVisibility, 60000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <>
       <Box className={styles.Admin}>
@@ -25,9 +49,11 @@ export function LandingPage() {
         >
           <Clock />
         </Box>
-        <NavLink to={"/start"}>
-          <AppButton buttonText={"Start"}></AppButton>
-        </NavLink>
+        {showStartButton && (
+          <NavLink to={"/start"}>
+            <AppButton buttonText={"Start"}></AppButton>
+          </NavLink>
+        )}
       </Box>
     </>
   );
