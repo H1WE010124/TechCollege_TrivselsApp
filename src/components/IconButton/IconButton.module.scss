@@ -2,7 +2,13 @@
   background-color: #ecffed;
   padding: 0.6rem 0.7rem;
   border-radius: 100%;
-
+  border: none;
+  height: 64px;
+  width: 64px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   svg {
     height: 3rem;
     width: 3rem;
