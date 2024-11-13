@@ -1,0 +1,150 @@
+import { Box, Typography } from "@mui/material";
+import { QuestionStepper } from "../../components/QuestionStepper/QuestionStepper";
+import { useContext, useEffect, useState } from "react";
+import { useGet } from "../../hooks/useGet";
+import { CustomSelect } from "../../components/Select/Select";
+import { QuestionCard } from "../../components/QuestionCard/QuestionCard";
+import { SwipeCard } from "../../components/SwipeCard/SwipeCard";
+import { IconButton } from "../../components/IconButton/IconButton";
+import { Question } from "../../components/Question/Question";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import { SubmissionStatusPage } from "../../pages/SubmissionStatusPage/SubmissionStatusPage";
+import { supabase } from "../../lib/supabaseClient";
+import { UserContext } from "../../context/UserContext";
+
+export const QuestionPage = () => {
+  const [userAnswers, setUserAnswers] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [subSelect, setSubSelect] = useState(null);
+  const [isDone, setIsDone] = useState(false);
+
+  // Get the Token
+  const { accessToken } = useContext(UserContext);
+
+  // Get the questions
+  const data = useGet("questions");
+
+  // Logging
+  console.log("Token: ", accessToken);
+  console.log("Subselect: ", subSelect);
+  console.log("Questions: ", data);
+
+  useEffect(() => {
+    console.log("Answers are; ", userAnswers);
+  }, [userAnswers]);
+
+  // function to update state with answers
+  const handleAnswer = (question, answer) => {
+    setUserAnswers((prev) => [
+      ...prev,
+      {
+        student_id: accessToken,
+        question_id: question.id,
+        option_id: answer,
+      },
+    ]);
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  // Function to remove last answer when going back
+  const handleAnswerBack = () => {
+    let clone = [...userAnswers];
+    clone.pop();
+    setUserAnswers(clone);
+  };
+
+  // Function to submit answers to supabase
+  const handleSubmit = async () => {
+    const { error } = await supabase
+      .from("student_responses")
+      .insert(userAnswers);
+    console.log("res", error);
+  };
+
+  // Function to set the selected class
+  const handleSelectClass = (classValue) => {
+    setSelectedClass(classValue);
+  };
+
+  // Break questions into two arrays
+  const positiveQuestions = data?.data?.filter((item) => item.section_id === 1);
+  const negativeQuestions = data?.data?.filter((item) => item.section_id === 2);
+  const questions = [negativeQuestions, positiveQuestions];
+
+  // Effect to check if form is done and submit answers
+  useEffect(() => {
+    if (currentIndex === questions[subSelect]?.length) {
+      setIsDone(true);
+      handleSubmit();
+    }
+  }, [currentIndex]);
+
+  return (
+    <Box>
+      {isDone ? (
+        <SubmissionStatusPage status={"success"} />
+      ) : selectedClass === null ? (
+        <>
+          <Typography variant="h4">Velkommen</Typography>
+          <br></br>
+          <CustomSelect
+            OptionsArray={["8U", "8V", "9U", "9V"]}
+            callback={handleSelectClass}
+            defaultText={"Vælg klasse"}
+          />
+        </>
+      ) : subSelect === null ? (
+        <QuestionCard currentQuestionIndex={0} totalQuestions={1}>
+          <Typography variant="h4">Har i dag været en god dag?</Typography>
+          <Box display={"flex"} justifyContent={"space-evenly"}>
+            <IconButton
+              callback={() => setSubSelect(0)}
+              styling="yesnoButtons"
+              value="0"
+            >
+              <ThumbDownIcon style={{ fill: "#2E7D32" }} />
+            </IconButton>
+            <IconButton
+              callback={() => setSubSelect(1)}
+              styling="yesnoButtons"
+              value="1"
+            >
+              <ThumbUpIcon style={{ fill: "#2E7D32" }} />
+            </IconButton>
+          </Box>
+        </QuestionCard>
+      ) : (
+        <>
+          <QuestionStepper
+            totalSteps={questions[subSelect]?.length}
+            currentStep={currentIndex}
+            setCurrentStep={setCurrentIndex}
+            backAction={handleAnswerBack}
+          />
+          {subSelect == 0 ? (
+            <SwipeCard
+              array={questions[subSelect]}
+              callback={handleAnswer}
+              currentQuestionIndex={currentIndex}
+              question={questions[subSelect][currentIndex]?.question}
+            />
+          ) : (
+            <QuestionCard
+              currentQuestionIndex={currentIndex}
+              totalQuestions={questions[subSelect].length}
+            >
+              <Question
+                question={questions[subSelect][currentIndex]?.question}
+                callback={handleAnswer}
+                array={questions[subSelect]}
+                currentIndex={currentIndex}
+              />
+            </QuestionCard>
+          )}
+        </>
+      )}
+    </Box>
+  );
+};

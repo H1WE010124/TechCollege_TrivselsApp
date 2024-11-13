@@ -11,12 +11,17 @@ export const SwipeCard = ({
   currentQuestionIndex,
   question,
 }) => {
+  const isDesktop = useMediaQuery("(min-width: 600px)");
 
-    const isDesktop = useMediaQuery('(min-width: 600px)')
+  useEffect(() => {
+    console.log(isDesktop);
+  }, [isDesktop]);
 
-    useEffect(()=>{
-        console.log(isDesktop)
-    },[isDesktop])
+  const onSwipe = (dir) => {
+    if (dir === "left") {
+      callback(array[currentQuestionIndex], 0);
+    } else callback(array[currentQuestionIndex], 1);
+  };
 
   return (
     <>
@@ -26,32 +31,42 @@ export const SwipeCard = ({
           totalQuestions={array?.length}
         >
           <p>{question}</p>
-          <YesNo callback={callback} />
+          <YesNo
+            callback={callback}
+            array={array}
+            currentIndex={currentQuestionIndex}
+          />
         </QuestionCard>
       )}
 
       {!isDesktop && (
         <div className={style.cardContainer}>
-          {array && array
-            .slice()
-            .reverse()
-            .map((item, index) => (
-              <TinderCard
-                key={item.id}
-                className={style.swipe}
-                preventSwipe={["up", "down"]}
-              >
-                <div className={style.swipeCard}>
-                  <QuestionCard
-                    currentQuestionIndex={array.length - 1 - index}
-                    totalQuestions={array.length}
-                  >
-                    <p>{question}</p>
-                    <YesNo callback={callback} />
-                  </QuestionCard>
-                </div>
-              </TinderCard>
-            ))}
+          {array &&
+            array
+              .slice()
+              .reverse()
+              .map((item, index) => (
+                <TinderCard
+                  key={item.id}
+                  className={style.swipe}
+                  preventSwipe={["up", "down"]}
+                  onSwipe={onSwipe}
+                >
+                  <div className={style.swipeCard}>
+                    <QuestionCard
+                      currentQuestionIndex={currentQuestionIndex}
+                      totalQuestions={array.length}
+                    >
+                      <p>{question}</p>
+                      <YesNo
+                        callback={callback}
+                        array={array}
+                        currentIndex={currentQuestionIndex}
+                      />
+                    </QuestionCard>
+                  </div>
+                </TinderCard>
+              ))}
         </div>
       )}
     </>
