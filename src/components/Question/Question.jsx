@@ -4,11 +4,22 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import Box from "@mui/material/Box";
-
+import Typography from "@mui/material/Typography";
 export const Question = ({ callback, question, currentIndex, array }) => {
   return (
     <Box className={styles.question}>
-      <h2>{question}</h2>
+     <Typography
+        variant="h2"
+        sx={{
+          fontSize: { xs: "3rem", lg: "5.8rem" },
+          padding: { xs: "16px", lg: "32px" },
+          color: "white",
+          textAlign: "center",
+          marginBottom: "20px",
+        }}
+      >
+        {question}
+      </Typography>
       <Box className={styles.options}>
         <Box
           onClick={() => callback(array[currentIndex], 1)}

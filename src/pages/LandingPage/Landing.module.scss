@@ -28,6 +28,12 @@ body {
 
     &:hover {
       background-color: #348b3a;
+      
+    }
+    &:focus,
+    &:active {
+      outline: none;
+      border: none; 
     }
   }
 }
@@ -42,8 +48,9 @@ body {
   height: 100vh;
 
   button {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     padding: 0.7rem 3rem;
+    height: 4.2rem;
     cursor: pointer;
     border: none;
     border-radius: 0.313rem;
@@ -53,5 +60,10 @@ body {
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
+    &:focus,
+    &:active {
+      outline: none;
+      border: none; 
+    }
   }
 }
