@@ -8,7 +8,7 @@ export function LandingPage() {
   return (
     <>
       <Box className={styles.Admin}>
-        <NavLink to="/admin">
+        <NavLink to="/login">
           <AppButton buttonText={"Admin"}></AppButton>
         </NavLink>
       </Box>
