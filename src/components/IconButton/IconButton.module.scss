@@ -1,10 +1,24 @@
-.yesnoButtons {
-  background-color: #ecffed;
-  padding: 0.6rem 0.7rem;
-  border-radius: 100%;
+.buttonContainer{
+width: 50%;
 
-  svg {
-    height: 3rem;
-    width: 3rem;
+  .yesnoButtons {
+    background-color: #ecffed;
+    padding: 0.6rem 0.7rem;
+    border-radius: 100%;
+    outline: none;
+  
+    
+  &:focus,
+  &:active {
+    outline: none;
+    border: none; 
   }
+    svg {
+      height: 3rem;
+      width: 3rem;
+    }
+  
+  }
+
 }
+
