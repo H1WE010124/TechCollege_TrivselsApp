@@ -1,10 +1,11 @@
-import React from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Outlet, Navigate } from "react-router-dom";
+import { AdminContext } from "../context/AdminContext";
 
 export const ProtectedRoutes = ({ protectedRoute }) => {
-  const isUserLoggedIn = false; 
+  const { adminUser } = useContext(AdminContext);
 
-  if (protectedRoute && !isUserLoggedIn) {
+  if (!adminUser) {
     return <Navigate to="/" />;
   }
 
