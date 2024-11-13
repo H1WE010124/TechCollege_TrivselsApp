@@ -9,18 +9,22 @@ const routes = [
     exact: true,
     index: true,
     component: LandingPage,
+    protected: false,
   },
   {
     path: "/admin",
     component: AdminPage,
+    protected: false,
   },
   {
     path: "/login",
     component: AdminLoginPage,
+    protected: false,
   },
   {
     path: "/start",
     component: QuestionPage,
+    protected: false,
   },
 ];
 
