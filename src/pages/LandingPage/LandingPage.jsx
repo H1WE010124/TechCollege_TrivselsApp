@@ -3,12 +3,14 @@ import styles from "./Landing.module.scss";
 import { NavLink } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { AppButton } from "../../components/AppButton/AppButton";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export function LandingPage() {
   return (
     <>
       <Box className={styles.Admin}>
-        <NavLink to="/admin">
+        <NavLink to="/login">
           <AppButton buttonText={"Admin"}></AppButton>
         </NavLink>
       </Box>

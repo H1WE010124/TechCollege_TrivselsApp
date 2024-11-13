@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import { QuestionStepper } from "../../components/QuestionStepper/QuestionStepper";
 import { useContext, useEffect, useState } from "react";
 import { useGet } from "../../hooks/useGet";
@@ -12,6 +12,8 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { SubmissionStatusPage } from "../../pages/SubmissionStatusPage/SubmissionStatusPage";
 import { supabase } from "../../lib/supabaseClient";
 import { UserContext } from "../../context/UserContext";
+import { AppButton } from "../../components/AppButton/AppButton";
+import { NavLink } from "react-router-dom";
 
 export const QuestionPage = () => {
   const [userAnswers, setUserAnswers] = useState([]);
@@ -19,6 +21,7 @@ export const QuestionPage = () => {
   const [selectedClass, setSelectedClass] = useState(null);
   const [subSelect, setSubSelect] = useState(null);
   const [isDone, setIsDone] = useState(false);
+  const [studentError, setStudentError] = useState(null);
 
   // Get the Token
   const { accessToken } = useContext(UserContext);
@@ -81,9 +84,34 @@ export const QuestionPage = () => {
     }
   }, [currentIndex]);
 
+  // Creates a user in Supabase when they have selected Class
+  useEffect(() => {
+    const createUserInDB = async () => {
+      if (accessToken && selectedClass) {
+        console.log("Token: ", accessToken);
+        const { error } = await supabase
+          .from("students")
+          .insert({ id: accessToken, class_name: selectedClass });
+        setStudentError(error);
+        //console.log("student creation: ", error.code);
+      }
+    };
+    createUserInDB();
+  }, [selectedClass]);
+
   return (
     <Box>
-      {isDone ? (
+      {studentError && studentError.code === "23505" ? (
+        <>
+          <Typography variant="h4">
+            Du har allerede udfyldt formularen
+          </Typography>
+          <NavLink to="/">
+            {" "}
+            <AppButton buttonText={"Gå tilbage"}></AppButton>
+          </NavLink>
+        </>
+      ) : isDone ? (
         <SubmissionStatusPage status={"success"} />
       ) : selectedClass === null ? (
         <>
