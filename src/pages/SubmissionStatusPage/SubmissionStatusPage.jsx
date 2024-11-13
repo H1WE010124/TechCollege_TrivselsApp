@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styles from "./SubmissionStatusPage.module.scss";
 
-export const SubmissionStatusPage = () => {
-  const [status, setStatus] = useState(null);
+export const SubmissionStatusPage = ({ status }) => {
+  //const [status, setStatus] = useState(null);
 
   // Funktion til at simulere formularindsendelse
-  const handleSubmit = async () => {
+  /*   const handleSubmit = async () => {
     try {
       // Tilfældigt respons for at simulere både succes og fejl
       const response = { ok: Math.random() > 0.5 };
@@ -19,13 +19,13 @@ export const SubmissionStatusPage = () => {
       setStatus("error");
     }
   };
-
+ */
   // Funktion til at prøve indsendelse igen efter en fejl
-  const handleRetry = () => {
+  /*   const handleRetry = () => {
     console.log("Retrying submission...");
     setStatus(null);
     handleSubmit();
-  };
+  }; */
 
   return (
     <main className={styles.statusPage}>
@@ -34,7 +34,10 @@ export const SubmissionStatusPage = () => {
         <section className={`${styles.message} ${styles.successMessage}`}>
           <h1>Tak for din deltagelse!</h1>
           <p>Din indsendelse er blevet modtaget.</p>
-          <button className={`${styles.button} ${styles.returnButton}`} onClick={() => (window.location.href = "/")}>
+          <button
+            className={`${styles.button} ${styles.returnButton}`}
+            onClick={() => (window.location.href = "/")}
+          >
             Tilbage til forsiden
           </button>
         </section>
@@ -44,8 +47,13 @@ export const SubmissionStatusPage = () => {
       {status === "error" && (
         <section className={`${styles.message} ${styles.errorMessage}`}>
           <h1>Ups! Noget gik galt</h1>
-          <p>Vi kunne desværre ikke modtage din indsendelse. Prøv venligst igen.</p>
-          <button className={`${styles.button} ${styles.retryButton}`} onClick={handleRetry}>
+          <p>
+            Vi kunne desværre ikke modtage din indsendelse. Prøv venligst igen.
+          </p>
+          <button
+            className={`${styles.button} ${styles.retryButton}`}
+            onClick={handleRetry}
+          >
             Prøv igen
           </button>
         </section>
@@ -53,4 +61,3 @@ export const SubmissionStatusPage = () => {
     </main>
   );
 };
-
