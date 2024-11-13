@@ -1,3 +1,10 @@
+import { BackButton } from "../../components/BackButton/BackButton";
+
 export const AdminPage = () => {
-  return <p>Admin</p>;
+  return (
+  <>
+  <BackButton page=''></BackButton>
+  <p>Admin</p>
+  </>
+  );
 };
