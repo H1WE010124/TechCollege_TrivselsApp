@@ -3,12 +3,12 @@ import styles from "./Question.module.scss";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box, Typography } from "@mui/material";
+
 export const Question = ({ callback, question, currentIndex, array }) => {
   return (
     <Box className={styles.question}>
-     <Typography
+      <Typography
         variant="h2"
         sx={{
           fontSize: { xs: "3rem", lg: "5.8rem" },
