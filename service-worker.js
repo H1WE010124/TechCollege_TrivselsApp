@@ -2,6 +2,7 @@ const staticCache = 'static-cache-v1';
 const dynamicCacheName = 'dynamic-cache-v1';
 
 const assets = [
+    '/',
     '/index.html',
     '/fallback.html',
 ];
@@ -49,7 +50,13 @@ self.addEventListener('fetch', event => {
             .catch(() => {
                 // Hvis netværket fejler, prøv at returnere fra cachen
                 return caches.match(event.request).then(cacheRes => {
-                    return cacheRes || caches.match('/fallback.html'); // Fallback til en offline-side
+                    if (cacheRes) {
+                        console.log("Serving from cache:", event.request.url);
+                        return cacheRes;
+                    } else {
+                        console.log("Serving fallback for offline mode");
+                        return caches.match('/fallback.html');
+                    }
                 });
             })
     );
