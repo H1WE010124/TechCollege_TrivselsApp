@@ -1,12 +1,12 @@
 import { Clock } from "../../components/Clock/Clock";
 import styles from "./Landing.module.scss";
 import { NavLink } from "react-router-dom";
-import Box from "@mui/material/Box";
+import { Typography, Box } from "@mui/material";
 import { AppButton } from "../../components/AppButton/AppButton";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import {LocationCheck} from '/src/helpers/LocationCheck.jsx';
-import Typography from '@mui/material/Typography';
+
 
 export function LandingPage() {
   return (
@@ -30,12 +30,9 @@ export function LandingPage() {
         <NavLink to={"/start"}>
           <AppButton buttonText={"Start"}></AppButton>
         </NavLink>
-          <LocationCheck >
-          <Typography variant="p">
-            <LocationCheck />
-          </Typography>
-          </LocationCheck>
-        
+        <Box mt={2}>
+        <LocationCheck />
+        </Box>
       </Box>
     </>
   );

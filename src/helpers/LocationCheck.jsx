@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 // Øster Uttrupvej 1 coordinates: 57.04823,9.96798
@@ -6,6 +7,8 @@ import { Outlet } from "react-router-dom";
 // Struervej 70 coordinates: 57.03772,9.98151
 
 export const LocationCheck = () => {
+    const [message, setMessage] = useState("");
+
     const locations = [
         { latitude: 57.04823, longitude: 9.96798, name: "Øster Uttrupvej 1" },
         { latitude: 57.05190, longitude: 9.96315, name: "Rørdalsvej 10" },
@@ -35,19 +38,19 @@ export const LocationCheck = () => {
         for (const location of locations) {
             const distance = calculateDistance(latitude, longitude, location.latitude, location.longitude);
             if (distance <= radius) {
-                console.log(`LOCATION OK? (${location.name}):`, true);
+                setMessage(`LOCATION OK? (${location.name}):`, true);
                 locationFound = true;
                 break;
             }
         }
 
         if (!locationFound) {
-            console.log("LOCATION OK?", false);
+            setMessage("LOCATION OK?", false);
         }
     };
 
     const error = () => {
-        console.log("Unable to retrieve location.");
+        setMessage("Unable to retrieve location.");
     };
 
     // request user's location
@@ -55,9 +58,15 @@ export const LocationCheck = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(success, error);
         } else {
-            console.log("Geolocation is not supported by this browser.");
+            setMessage("Geolocation is not supported by this browser.");
         }
     }, []);
 
-    return <Outlet />;
+    return <>
+    <Outlet />
+    <Typography variant="body2" color="error">
+     {message}
+    </Typography>
+    </>
+    
 };
