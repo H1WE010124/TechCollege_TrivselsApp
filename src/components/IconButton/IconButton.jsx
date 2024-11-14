@@ -1,9 +1,10 @@
 import style from "./IconButton.module.scss";
+import Button from "@mui/material/Button";
 
 export const IconButton = ({ styling, callback, children, value }) => {
   return (
-    <button className={`${style[styling]}`} onClick={() => callback(value)}>
+    <Button className={`${style[styling]}`} onClick={() => callback(value)}>
       {children}
-    </button>
+    </Button>
   );
 };

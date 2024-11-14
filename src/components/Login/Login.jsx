@@ -25,9 +25,9 @@ export const Login = () => {
 
   return (
     <Box component="section" className={s.loginStyle}>
-      <h2>
+      <Typography variant="h2">
         Log ind som <span>admin</span>
-      </h2>
+      </Typography>
       <Box
         component="form"
         className={s.container}
