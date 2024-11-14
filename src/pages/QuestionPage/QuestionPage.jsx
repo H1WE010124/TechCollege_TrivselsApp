@@ -1,19 +1,20 @@
-import { Box, Card, Typography } from "@mui/material";
-import { QuestionStepper } from "../../components/QuestionStepper/QuestionStepper";
-import { useContext, useEffect, useState } from "react";
-import { useGet } from "../../hooks/useGet";
-import { CustomSelect } from "../../components/Select/Select";
-import { QuestionCard } from "../../components/QuestionCard/QuestionCard";
-import { SwipeCard } from "../../components/SwipeCard/SwipeCard";
-import { IconButton } from "../../components/IconButton/IconButton";
-import { Question } from "../../components/Question/Question";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import { SubmissionStatusPage } from "../../pages/SubmissionStatusPage/SubmissionStatusPage";
-import { supabase } from "../../lib/supabaseClient";
-import { UserContext } from "../../context/UserContext";
-import { AppButton } from "../../components/AppButton/AppButton";
-import { NavLink } from "react-router-dom";
+import { Box, Typography } from '@mui/material';
+import { QuestionStepper } from '../../components/QuestionStepper/QuestionStepper';
+import { useContext, useEffect, useState } from 'react';
+import { useGet } from '../../hooks/useGet';
+import { CustomSelect } from '../../components/Select/Select';
+import { QuestionCard } from '../../components/QuestionCard/QuestionCard';
+import { SwipeCard } from '../../components/SwipeCard/SwipeCard';
+import { IconButton } from '../../components/IconButton/IconButton';
+import { Question } from '../../components/Question/Question';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import { SubmissionStatusPage } from '../../pages/SubmissionStatusPage/SubmissionStatusPage';
+import { supabase } from '../../lib/supabaseClient';
+import { UserContext } from '../../context/UserContext';
+import { AppButton } from '../../components/AppButton/AppButton';
+import { NavLink } from 'react-router-dom';
+import { classes } from '../../lib/data';
 
 export const QuestionPage = () => {
   const [userAnswers, setUserAnswers] = useState([]);
@@ -27,15 +28,15 @@ export const QuestionPage = () => {
   const { accessToken } = useContext(UserContext);
 
   // Get the questions
-  const data = useGet("questions");
+  const data = useGet('questions');
 
   // Logging
-  console.log("Token: ", accessToken);
-  console.log("Subselect: ", subSelect);
-  console.log("Questions: ", data);
+  console.log('Token: ', accessToken);
+  console.log('Subselect: ', subSelect);
+  console.log('Questions: ', data);
 
   useEffect(() => {
-    console.log("Answers are; ", userAnswers);
+    console.log('Answers are; ', userAnswers);
   }, [userAnswers]);
 
   // function to update state with answers
@@ -60,10 +61,8 @@ export const QuestionPage = () => {
 
   // Function to submit answers to supabase
   const handleSubmit = async () => {
-    const { error } = await supabase
-      .from("student_responses")
-      .insert(userAnswers);
-    console.log("res", error);
+    const { error } = await supabase.from('student_responses').insert(userAnswers);
+    console.log('res', error);
   };
 
   // Function to set the selected class
@@ -88,10 +87,8 @@ export const QuestionPage = () => {
   useEffect(() => {
     const createUserInDB = async () => {
       if (accessToken && selectedClass) {
-        console.log("Token: ", accessToken);
-        const { error } = await supabase
-          .from("students")
-          .insert({ id: accessToken, class_name: selectedClass });
+        console.log('Token: ', accessToken);
+        const { error } = await supabase.from('students').insert({ id: accessToken, class_name: selectedClass });
         setStudentError(error);
         //console.log("student creation: ", error.code);
       }
@@ -101,60 +98,47 @@ export const QuestionPage = () => {
 
   return (
     <Box>
-      {studentError && studentError.code === "23505" ? (
+      {studentError && studentError.code === '23505' ? (
         <>
-          <Typography variant="h4">
-            Du har allerede udfyldt formularen
-          </Typography>
-          <NavLink to="/">
-            {" "}
-            <AppButton buttonText={"Gå tilbage"}></AppButton>
+          <Typography variant='h4'>Du har allerede udfyldt formularen</Typography>
+          <NavLink to='/'>
+            {' '}
+            <AppButton buttonText={'Gå tilbage'}></AppButton>
           </NavLink>
         </>
       ) : isDone ? (
-        <SubmissionStatusPage status={"success"} />
+        <SubmissionStatusPage status={'success'} />
       ) : selectedClass === null ? (
         <>
-          <Typography variant="h4" sx={{
-            fontSize: { xs: "2.5rem", md: "3.5rem" }, 
-            color: "#2E7D32"
-          }}>Velkommen</Typography>
+          <Typography
+            variant='h4'
+            sx={{
+              fontSize: { xs: '2.5rem', md: '3.5rem' },
+              color: '#2E7D32',
+            }}
+          >
+            Velkommen
+          </Typography>
           <br></br>
-          <CustomSelect
-            OptionsArray={["8U", "8V", "9U", "9V"]}
-            callback={handleSelectClass}
-            defaultText={"Vælg klasse"}
-          />
+          <CustomSelect OptionsArray={classes} callback={handleSelectClass} defaultText={'Vælg klasse'} />
         </>
       ) : subSelect === null ? (
-        <QuestionCard currentQuestionIndex={0} totalQuestions={1}  >
-          <Typography variant="h4" sx={{fontSize:{lg:"2.8rem", xs:"2rem"}, padding:"32px"}}>Har i dag været en god dag?</Typography>
-          <Box display={"flex"} justifyContent={"space-evenly"}>
-            <IconButton
-              callback={() => setSubSelect(0)}
-              styling="yesnoButtons"
-              value="0"
-              
-            >
-              <ThumbDownIcon style={{ fill: "#2E7D32" }} />
+        <QuestionCard currentQuestionIndex={0} totalQuestions={1}>
+          <Typography variant='h4' sx={{ fontSize: { lg: '2.8rem', xs: '2rem' }, padding: '32px' }}>
+            Har i dag været en god dag?
+          </Typography>
+          <Box display={'flex'} justifyContent={'space-evenly'}>
+            <IconButton callback={() => setSubSelect(0)} styling='yesnoButtons' value='0'>
+              <ThumbDownIcon style={{ fill: '#2E7D32' }} />
             </IconButton>
-            <IconButton
-              callback={() => setSubSelect(1)}
-              styling="yesnoButtons"
-              value="1"
-            >
-              <ThumbUpIcon style={{ fill: "#2E7D32" }} />
+            <IconButton callback={() => setSubSelect(1)} styling='yesnoButtons' value='1'>
+              <ThumbUpIcon style={{ fill: '#2E7D32' }} />
             </IconButton>
           </Box>
         </QuestionCard>
       ) : (
         <>
-          <QuestionStepper
-            totalSteps={questions[subSelect]?.length}
-            currentStep={currentIndex}
-            setCurrentStep={setCurrentIndex}
-            backAction={handleAnswerBack}
-          />
+          <QuestionStepper totalSteps={questions[subSelect]?.length} currentStep={currentIndex} setCurrentStep={setCurrentIndex} backAction={handleAnswerBack} />
           {subSelect == 0 ? (
             <SwipeCard
               array={questions[subSelect]}
@@ -163,16 +147,8 @@ export const QuestionPage = () => {
               question={questions[subSelect][currentIndex]?.question}
             />
           ) : (
-            <QuestionCard
-              currentQuestionIndex={currentIndex}
-              totalQuestions={questions[subSelect].length}
-            >
-              <Question
-                question={questions[subSelect][currentIndex]?.question}
-                callback={handleAnswer}
-                array={questions[subSelect]}
-                currentIndex={currentIndex}
-              />
+            <QuestionCard currentQuestionIndex={currentIndex} totalQuestions={questions[subSelect].length}>
+              <Question question={questions[subSelect][currentIndex]?.question} callback={handleAnswer} array={questions[subSelect]} currentIndex={currentIndex} />
             </QuestionCard>
           )}
         </>
