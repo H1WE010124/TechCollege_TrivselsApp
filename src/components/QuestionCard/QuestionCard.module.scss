@@ -1,11 +1,11 @@
 .card {
   padding: 2rem;
   width: 80vw;
-  height: auto;
+  // height: auto;
   display: grid;
-
   .progress {
     text-align: right;
+
   }
 
   .content {
@@ -28,11 +28,11 @@
 
     @media (min-width: 1200px) {
       width: 45vw;
-      height: 50vh;
+      // height: 55vh;
       .content p{
        font-size: 2.8rem;
 
       }
     }
-  
+
 }
