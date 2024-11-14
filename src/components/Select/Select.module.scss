@@ -1,0 +1,12 @@
+.select{
+    width: 45vw;
+    background-color: #ECFFED;
+    border: 1px solid #34C759;
+
+    .celector{
+        border: 1px solid #34C759;
+        &:focus{
+            border: 1px solid #34C759;
+        }
+    }
+}
