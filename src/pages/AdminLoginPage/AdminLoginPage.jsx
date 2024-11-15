@@ -5,6 +5,7 @@ import s from "./AdminLoginPage.module.scss";
 import { supabase } from "../../lib/supabaseClient";
 import { AdminContext } from "../../context/AdminContext";
 import { useNavigate } from "react-router-dom";
+import { BackButton } from "../../components/BackButton/BackButton";
 
 export const AdminLoginPage = () => {
   const [user, setUser] = useState("");
@@ -48,15 +49,17 @@ export const AdminLoginPage = () => {
 
   return (
     <Container maxWidth="m" className={s.container}>
+      <BackButton page=''></BackButton>
       <Box
         display="flex"
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
         padding={3}
-        style={{ backgroundColor: "#ECFFED", marginTop: "50px" }}
+        style={{ marginTop: "50px" }}
       >
-        <h2
+        <Typography
+          variant="h2"
           style={{
             color: "#2e7d32",
             textAlign: "center",
@@ -76,7 +79,7 @@ export const AdminLoginPage = () => {
           >
             admin
           </span>
-        </h2>
+        </Typography>
         <form
           onSubmit={handleSubmit}
           style={{

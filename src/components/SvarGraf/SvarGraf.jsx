@@ -14,6 +14,7 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import { supabase } from "../../lib/supabaseClient";
+import { Box, Typography } from "@mui/material";
 
 // Registrér Chart.js elementer, så de kan bruges til at lave et søjlediagram
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
@@ -117,21 +118,25 @@ export const SvarGraf = ({ spørgsmål }) => {
   };
 
   return (
-    <section className={styles.container} aria-labelledby="spørgsmål-titel">
+    <Box
+      variant="section"
+      className={styles.container}
+      aria-labelledby="spørgsmål-titel"
+    >
       {/* Overskrift med spørgsmålet */}
-      <h2 id="spørgsmål-titel" className={styles.title}>
+      <Typography variant="h2" id="spørgsmål-titel" className={styles.title}>
         {spørgsmål}
-      </h2>
+      </Typography>
 
       {/* Diagramvisning */}
-      <div className={styles.chartWrapper}>
+      <Box className={styles.chartWrapper}>
         <Bar data={chartData} options={chartOptions} />
-      </div>
+      </Box>
 
       {/* Kommentar-sektionen, der kan foldes ud */}
-      <div className={styles.commentSection}>
+      <Box className={styles.commentSection}>
         {testData.map((item, index) => (
-          <div
+          <Box
             key={index}
             className={styles.commentToggle}
             onClick={() => toggleComments(index)}
@@ -150,10 +155,10 @@ export const SvarGraf = ({ spørgsmål }) => {
                 ))}
               </ul>
             )}
-          </div>
+          </Box>
         ))}
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 };
 

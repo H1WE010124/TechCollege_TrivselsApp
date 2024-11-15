@@ -4,8 +4,8 @@ import { SvarGraf } from "../../components/SvarGraf/SvarGraf";
 export const AdminPage = () => {
   return (
     <>
-      <BackButton page=""></BackButton>
-      <p>Admin</p>
+      <BackButton page="login"></BackButton>
+      <Typography variant="p">Admin</Typography>
 
       <SvarGraf />
     </>
