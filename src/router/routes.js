@@ -14,7 +14,7 @@ const routes = [
   {
     path: "/admin",
     component: AdminPage,
-    protected: false,
+    protected: true,
   },
   {
     path: "/login",
