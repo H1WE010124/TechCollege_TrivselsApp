@@ -1,10 +1,31 @@
+.buttonContainer{
+width: 50%;
+justify-content: center;
+display: flex;
+align-items: center;
+
+
 .yesnoButtons {
   background-color: #ecffed;
   padding: 0.6rem 0.7rem;
   border-radius: 100%;
+  outline: none;
+  border: none;
+  height: 64px;
+  width: 64px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 
+  &:focus,
+  &:active {
+    outline: none;
+    border: none;
+  }
   svg {
     height: 3rem;
     width: 3rem;
   }
+}
 }

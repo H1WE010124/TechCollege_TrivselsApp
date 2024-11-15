@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Button, TextField, Container, Box, Typography } from "@mui/material";
 import s from "./AdminLoginPage.module.scss";
+import { supabase } from "../../lib/supabaseClient";
+import { AdminContext } from "../../context/AdminContext";
+import { useNavigate } from "react-router-dom";
+import { BackButton } from "../../components/BackButton/BackButton";
 
 export const AdminLoginPage = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const { setAdminUser } = useContext(AdminContext);
   //const navigate = useNavigate()
-  //const {login} = useUser()// Get the login function from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,23 +26,21 @@ export const AdminLoginPage = () => {
     }
 
     try {
-      // Send a POST request to the backend with the login details
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user, password }),
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: user,
+        password: password,
       });
-      if (!response.ok) {
+
+      if (error) {
         throw new Error("Login mislykkedes. Prøv igen.");
       }
 
-      if (response.ok) {
-        const data = await response.json();
-        login(data.token); // Save token in UserContext
-        navigate("/statistics");
+      if (data) {
+        setAdminUser(data);
+        navigate("/admin");
       } else {
-        const errorData = await response.json();
-        setError(errorData.message || "Login mislykkedes. Prøv igen.");
+        //const errorData = await response.json();
+        setError("Login mislykkedes. Prøv igen.");
       }
     } catch (err) {
       setError("Der opstod en fejl. Prøv igen senere.");
@@ -45,15 +49,17 @@ export const AdminLoginPage = () => {
 
   return (
     <Container maxWidth="m" className={s.container}>
+      <BackButton page=''></BackButton>
       <Box
         display="flex"
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
         padding={3}
-        style={{ backgroundColor: "#ECFFED", marginTop: "50px" }}
+        style={{ marginTop: "50px" }}
       >
-        <h2
+        <Typography
+          variant="h2"
           style={{
             color: "#2e7d32",
             textAlign: "center",
@@ -73,7 +79,7 @@ export const AdminLoginPage = () => {
           >
             admin
           </span>
-        </h2>
+        </Typography>
         <form
           onSubmit={handleSubmit}
           style={{
@@ -84,7 +90,7 @@ export const AdminLoginPage = () => {
           }}
         >
           <TextField
-            label="Brugernavn"
+            label="Email"
             id="outlined-required"
             variant="outlined"
             margin="normal"
