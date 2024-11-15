@@ -1,8 +1,13 @@
 .card {
-  padding: 2rem;
-  width: 80vw;
-  height: auto;
   display: grid;
+  padding: 1rem;
+  width: 300px;
+  height: 500px;
+
+  @media (min-width: 1200px) {
+    height: 600px;
+    width: 500px;
+  }
 
   .progress {
     text-align: right;
@@ -13,26 +18,16 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
+
     p {
       justify-self: start;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-       font-size: 2rem;
-       padding: 32px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 2rem;
+      padding: 32px;
     }
   }
 
   .content:nth-child(2) {
     justify-content: space-between;
-
   }
-
-    @media (min-width: 1200px) {
-      width: 45vw;
-      height: 50vh;
-      .content p{
-       font-size: 2.8rem;
-
-      }
-    }
-  
 }
