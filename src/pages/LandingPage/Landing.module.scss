@@ -1,0 +1,78 @@
+$primary-color: #ecffed;
+$secondary-color: #2e7d32;
+//Global scss
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: none;
+  overflow:hidden;
+}
+
+body {
+  background-color: $primary-color;
+
+}
+
+//Admin knap
+.Admin {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+
+  button {
+    background-color: $secondary-color;
+    padding: 0.6rem;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #348b3a;
+
+    }
+    &:focus,
+    &:active {
+      outline: none;
+      border: none;
+    }
+  }
+}
+//_______________________
+
+//Ur og Start knap
+.ClockAndStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .CountdownText{
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  button {
+    font-size: 2.2rem;
+    padding: 0.7rem 3rem;
+    height: 4.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.313rem;
+    background-color: $secondary-color;
+    color: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    &:focus,
+    &:active {
+      outline: none;
+      border: none;
+    }
+  }
+}

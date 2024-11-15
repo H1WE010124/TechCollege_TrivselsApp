@@ -4,40 +4,38 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import Box from "@mui/material/Box";
-
-export const Question = ({ callback, question }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-
-  const handleAnswer = (answer) => {
-    setSelectedAnswer(answer);
-    callback(answer);
-  };
-
+import Typography from "@mui/material/Typography";
+export const Question = ({ callback, question, currentIndex, array }) => {
   return (
     <Box className={styles.question}>
-      <h2>{question}</h2>
+     <Typography
+        variant="h2"
+        sx={{
+          fontSize: { xs: "2rem", lg: "2.8rem" },
+          padding: { xs: "16px", lg: "32px" },
+          color: "white",
+          textAlign: "center",
+          marginBottom: "20px",
+        }}
+      >
+        {question}
+      </Typography>
       <Box className={styles.options}>
         <Box
-          onClick={() => handleAnswer(1)}
-          className={`${styles.icon} ${
-            selectedAnswer === 1 ? styles.selected : ""
-          }`}
+          onClick={() => callback(array[currentIndex], 1)}
+          className={`${styles.icon}`}
         >
           <SentimentVeryDissatisfiedIcon />
         </Box>
         <Box
-          onClick={() => handleAnswer(2)}
-          className={`${styles.icon} ${
-            selectedAnswer === 2 ? styles.selected : ""
-          }`}
+          onClick={() => callback(array[currentIndex], 2)}
+          className={`${styles.icon}`}
         >
           <SentimentNeutralIcon />
         </Box>
         <Box
-          onClick={() => handleAnswer(3)}
-          className={`${styles.icon} ${
-            selectedAnswer === 3 ? styles.selected : ""
-          }`}
+          onClick={() => callback(array[currentIndex], 3)}
+          className={`${styles.icon}`}
         >
           <SentimentVerySatisfiedIcon />
         </Box>
