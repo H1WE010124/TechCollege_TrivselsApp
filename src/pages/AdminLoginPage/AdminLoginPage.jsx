@@ -54,7 +54,7 @@ export const AdminLoginPage = () => {
         alignItems="center"
         justifyContent="center"
         padding={3}
-        style={{ backgroundColor: "#ECFFED", marginTop: "50px" }}
+        style={{ marginTop: "50px" }}
       >
         <h2
           style={{

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -14,6 +14,7 @@ import { Question } from "./components/Question/Question";
 import { Clock } from "./components/Clock/Clock";
 import RouterComponent from "./router/Router";
 import routes from "./router/routes";
+import { ThemeContext } from "./context/ThemeContext";
 
 const themeLight = createTheme({
   palette: {
@@ -54,12 +55,13 @@ const themeDark = createTheme({
 });
 
 function App() {
-  const [light, setLight] = useState(true);
+
+  const {mode} = useContext(ThemeContext)
 
   return (
     <>
       {/* wrapping everything in ThemeProvider component so it affects everything and passing prop called theme and set it ecqual to which theme we want to provode to our app */}
-      <ThemeProvider theme={light ? themeLight : themeDark}>
+      <ThemeProvider theme={ mode === 'light' ? themeLight : themeDark}>
         {/* CssBaseline inside ThemeProvider enables dark mode background */}
         <CssBaseline enableColorScheme />
         <RouterComponent routeArray={routes} />

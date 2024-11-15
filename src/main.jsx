@@ -1,4 +1,3 @@
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -6,6 +5,7 @@ import { UserContextProvider } from "./context/UserContext.jsx";
 import App from "./App.jsx";
 import "../service-worker.js";
 import { AdminContextProvider } from "./context/AdminContext.jsx";
+import { ThemeContextProvider } from "./context/ThemeContext.jsx";
 
 const queryClient = new QueryClient();
 
@@ -20,12 +20,14 @@ if ("serviceWorker" in navigator) {
 }
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <UserContextProvider>
-        <AdminContextProvider>
-          <App />
-        </AdminContextProvider>
-      </UserContextProvider>
-    </QueryClientProvider>
+    <ThemeContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <UserContextProvider>
+          <AdminContextProvider>
+            <App />
+          </AdminContextProvider>
+        </UserContextProvider>
+      </QueryClientProvider>
+    </ThemeContextProvider>
   </StrictMode>
 );
