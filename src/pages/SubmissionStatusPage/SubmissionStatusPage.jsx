@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./SubmissionStatusPage.module.scss";
+import { Typography, Box, Button, Container } from "@mui/material";
 
 export const SubmissionStatusPage = ({ status }) => {
   //const [status, setStatus] = useState(null);
@@ -28,36 +29,42 @@ export const SubmissionStatusPage = ({ status }) => {
   }; */
 
   return (
-    <main className={styles.statusPage}>
+    <Container className={styles.statusPage}>
       {/* Viser succesbesked hvis status er "success" */}
       {status === "success" && (
-        <section className={`${styles.message} ${styles.successMessage}`}>
-          <h1>Tak for din deltagelse!</h1>
-          <p>Din indsendelse er blevet modtaget.</p>
-          <button
+        <Box
+          variant="section"
+          className={`${styles.message} ${styles.successMessage}`}
+        >
+          <Typography variant="h1">Tak for din deltagelse!</Typography>
+          <Typography>Din indsendelse er blevet modtaget.</Typography>
+          <Button
             className={`${styles.button} ${styles.returnButton}`}
             onClick={() => (window.location.href = "/")}
           >
             Tilbage til forsiden
-          </button>
-        </section>
+          </Button>
+        </Box>
       )}
 
       {/* Viser fejlbesked hvis status er "error" */}
       {status === "error" && (
-        <section className={`${styles.message} ${styles.errorMessage}`}>
-          <h1>Ups! Noget gik galt</h1>
-          <p>
+        <Box
+          variant="section"
+          className={`${styles.message} ${styles.errorMessage}`}
+        >
+          <Typography variant="h1">Ups! Noget gik galt</Typography>
+          <Typography>
             Vi kunne desværre ikke modtage din indsendelse. Prøv venligst igen.
-          </p>
-          <button
+          </Typography>
+          <Button
             className={`${styles.button} ${styles.retryButton}`}
             onClick={handleRetry}
           >
             Prøv igen
-          </button>
-        </section>
+          </Button>
+        </Box>
       )}
-    </main>
+    </Container>
   );
 };
