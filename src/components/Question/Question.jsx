@@ -11,7 +11,7 @@ export const Question = ({ callback, question, currentIndex, array }) => {
       <Typography
         variant="h2"
         sx={{
-          fontSize: { xs: "3rem", lg: "5.8rem" },
+          fontSize: { xs: "2rem", lg: "2.8rem" },
           padding: { xs: "16px", lg: "32px" },
           color: "white",
           textAlign: "center",

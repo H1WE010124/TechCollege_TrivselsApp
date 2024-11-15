@@ -1,5 +1,9 @@
 .buttonContainer{
 width: 50%;
+justify-content: center;
+display: flex;
+align-items: center;
+
 
 .yesnoButtons {
   background-color: #ecffed;
@@ -13,11 +17,11 @@ width: 50%;
   justify-content: center;
   align-items: center;
   display: flex;
-  
+
   &:focus,
   &:active {
     outline: none;
-    border: none; 
+    border: none;
   }
   svg {
     height: 3rem;
