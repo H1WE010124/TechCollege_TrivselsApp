@@ -56,9 +56,10 @@ export const AdminLoginPage = () => {
         alignItems="center"
         justifyContent="center"
         padding={3}
-        style={{ backgroundColor: "#ECFFED", marginTop: "50px" }}
+        style={{ marginTop: "50px" }}
       >
-        <h2
+        <Typography
+          variant="h2"
           style={{
             color: "#2e7d32",
             textAlign: "center",
@@ -78,7 +79,7 @@ export const AdminLoginPage = () => {
           >
             admin
           </span>
-        </h2>
+        </Typography>
         <form
           onSubmit={handleSubmit}
           style={{
