@@ -44,6 +44,11 @@ $button-hover: rgba(46, 125, 50, 0.4);
 
       &:hover {
         background-color: $button-hover; 
+        &:focus,
+  &:active {
+    outline: none;
+    border: none; 
+  }
       }
     }
   }
