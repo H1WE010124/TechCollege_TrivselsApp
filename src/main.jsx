@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UserContextProvider } from "./context/UserContext.jsx";
 import { AdminContextProvider } from "./context/AdminContext.jsx";
+import { ThemeContextProvider } from "./context/ThemeContext.jsx";
 
 
 export const App = React.lazy(() => import("./App"));
