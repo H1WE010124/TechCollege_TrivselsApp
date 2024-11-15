@@ -3,12 +3,12 @@ import styles from "./Landing.module.scss";
 import { NavLink } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
 import { AppButton } from "../../components/AppButton/AppButton";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../../context/UserContext";
-import {LocationCheck} from '/src/helpers/LocationCheck.jsx';
-
+import { useState } from "react";
+import { LocationCheck } from "/src/helpers/LocationCheck.jsx";
 
 export function LandingPage() {
+  const [locationOk, setLocationOk] = useState(null); // null = checking, true = location OK, false = location not OK
+
   return (
     <>
       <Box className={styles.Admin}>
@@ -27,11 +27,24 @@ export function LandingPage() {
         >
           <Clock />
         </Box>
-        <NavLink to={"/start"}>
-          <AppButton buttonText={"Start"}></AppButton>
-        </NavLink>
+        {locationOk === true && (
+          <NavLink to={"/start"}>
+            <AppButton buttonText={"Start"}></AppButton>
+          </NavLink>
+        )}
+        {locationOk === false && (
+          <Typography
+            sx={{
+              color: "black",
+              fontSize: "24px",
+              marginTop: "10px",
+            }}
+          >
+            Du skal være på skolen for at tilgå meningsmålingen
+          </Typography>
+        )}
         <Box mt={2}>
-        <LocationCheck />
+          <LocationCheck onLocationCheck={setLocationOk} />
         </Box>
       </Box>
     </>
