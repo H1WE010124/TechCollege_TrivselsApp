@@ -33,7 +33,7 @@ export const CustomSelect = ({ OptionsArray, callback, defaultText }) => {
 
       >
         {OptionsArray.map((option, index) => (
-          <MenuItem key={index} value={option}>
+          <MenuItem sx={{ backgroundColor: 'transparent', color: 'black'}} key={index} value={option}>
             {option}
           </MenuItem>
         ))}
