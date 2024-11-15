@@ -10,7 +10,7 @@ export function LandingPage() {
   const [showStartButton, setShowStartButton] = useState(false);
   const [countdownText, setCountdownText] = useState("");
 
- // tjek om klok er mellem 12:00 and 14:00
+  // tjek om klok er mellem 12:00 and 14:00
   const checkTimeRange = () => {
     const now = new Date();
     const hours = now.getHours();
@@ -34,9 +34,13 @@ export function LandingPage() {
 
     const timeDifference = targetTime - now;
     const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const minutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
 
-    setCountdownText(`Meningsmåling åbner om ${hours} timer og ${minutes} minutter`);
+    setCountdownText(
+      `Meningsmåling åbner om ${hours} timer og ${minutes} minutter`
+    );
   };
 
   useEffect(() => {
@@ -68,14 +72,12 @@ export function LandingPage() {
         >
           <Clock />
         </Box>
-        
+
         {!showStartButton && (
-          <Box className={styles.CountdownText}>
-            {countdownText}
-          </Box>
+          <Box className={styles.CountdownText}>{countdownText}</Box>
         )}
 
-        {showStartButton && (
+        {!showStartButton && (
           <NavLink to={"/start"}>
             <AppButton buttonText={"Start"}></AppButton>
           </NavLink>
