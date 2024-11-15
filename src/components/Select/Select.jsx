@@ -19,6 +19,18 @@ export const CustomSelect = ({ OptionsArray, callback, defaultText }) => {
         onChange={handleChange}
         displayEmpty
         renderValue={(selected) => (selected ? selected : defaultText)}
+        sx={{
+          '& .MuiOutlinedInput-notchedOutline': {
+            border: '1px solid #34C759',
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#34C759',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#34C759',
+          },
+        }}
+
       >
         {OptionsArray.map((option, index) => (
           <MenuItem key={index} value={option}>
