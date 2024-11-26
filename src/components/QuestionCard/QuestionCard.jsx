@@ -9,10 +9,10 @@ export const QuestionCard = ({
   return (
     <Card
       className={s.card}
-      sx={{ color: "#ecffed", backgroundColor: "#2e7d32" }}
+      sx={{ color: "#ecffed", backgroundColor: "#2e7d32", height: "60vh" }}
     >
       <Box className={s.progress}>
-        <Typography sx={{ fontSize: "2rem" }}>
+        <Typography sx={{ fontSize: "1.8rem" }}>
           {currentQuestionIndex + 1}/{totalQuestions}
         </Typography>
       </Box>

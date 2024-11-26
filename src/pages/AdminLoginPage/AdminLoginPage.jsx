@@ -49,7 +49,6 @@ export const AdminLoginPage = () => {
 
   return (
     <Container maxWidth="m" className={s.container}>
-      <BackButton page=''></BackButton>
       <Box
         display="flex"
         flexDirection="column"

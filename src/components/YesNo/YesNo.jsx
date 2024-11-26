@@ -8,14 +8,14 @@ export const YesNo = ({ callback, array, currentIndex }) => {
   return (
     <Box className={style.yesno}>
       <IconButton
-        callback={() => callback(array[currentIndex], 0)}
+        callback={() => callback(array[currentIndex], 1)}
         styling="yesnoButtons"
         value="0"
       >
         <ThumbDownIcon style={{ fill: "#2E7D32" }} />
       </IconButton>
       <IconButton
-        callback={() => callback(array[currentIndex], 1)}
+        callback={() => callback(array[currentIndex], 2)}
         styling="yesnoButtons"
         value="1"
       >

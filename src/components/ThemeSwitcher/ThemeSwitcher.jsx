@@ -8,14 +8,11 @@ export const ThemeSwitcher = () => {
   const { mode, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <Button
-      onClick={toggleTheme}
-      style={{ minWidth: "auto", position: "absolute", right: "5%", top: "2%" }}
-    >
+    <Button onClick={toggleTheme}>
       {mode === "light" ? (
-        <DarkModeIcon sx={{ width: "50px", height: "50px" }} />
+        <DarkModeIcon sx={{ width: "32px", height: "32px" }} />
       ) : (
-        <LightModeIcon sx={{ width: "50px", height: "50px" }} />
+        <LightModeIcon sx={{ width: "32px", height: "32px" }} />
       )}
     </Button>
   );

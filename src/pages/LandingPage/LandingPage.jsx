@@ -3,19 +3,14 @@ import styles from "./Landing.module.scss";
 import { NavLink } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
 import { AppButton } from "../../components/AppButton/AppButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LocationCheck } from "/src/helpers/LocationCheck.jsx";
-
 export function LandingPage() {
-  const [locationOk, setLocationOk] = useState(null); // null = checking, true = location OK, false = location not OK
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/UserContext";
-
-export function LandingPage() {
-  const [showStartButton, setShowStartButton] = useState(false);
+  const [locationOk, setLocationOk] = useState(false); // null = checking, true = location OK, false = location not OK
+  const [showStartButton, setShowStartButton] = useState(true);
   const [countdownText, setCountdownText] = useState("");
 
- // tjek om klok er mellem 12:00 and 14:00
+  // tjek om klok er mellem 12:00 and 14:00
   const checkTimeRange = () => {
     const now = new Date();
     const hours = now.getHours();
@@ -39,9 +34,13 @@ export function LandingPage() {
 
     const timeDifference = targetTime - now;
     const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const minutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
 
-    setCountdownText(`Meningsmåling åbner om ${hours} timer og ${minutes} minutter`);
+    setCountdownText(
+      `Meningsmåling åbner om ${hours} timer og ${minutes} minutter`
+    );
   };
 
   useEffect(() => {
@@ -57,12 +56,6 @@ export function LandingPage() {
 
   return (
     <>
-      <Box className={styles.Admin}>
-        <NavLink to="/login">
-          <AppButton buttonText={"Admin"}></AppButton>
-        </NavLink>
-      </Box>
-
       <Box className={styles.ClockAndStart}>
         <Box
           sx={{
@@ -73,29 +66,23 @@ export function LandingPage() {
         >
           <Clock />
         </Box>
-        {locationOk === true && (
-        
-        {!showStartButton && (
-          <Box className={styles.CountdownText}>
-            {countdownText}
-          </Box>
-        )}
-
-        {showStartButton && (
-          <NavLink to={"/start"}>
-            <AppButton buttonText={"Start"}></AppButton>
-          </NavLink>
+        {locationOk === true && !showStartButton && (
+          <Box className={styles.CountdownText}>{countdownText}</Box>
         )}
         {locationOk === false && (
           <Typography
             sx={{
-              color: "black",
               fontSize: "24px",
               marginTop: "10px",
             }}
           >
             Du skal være på skolen for at tilgå meningsmålingen
           </Typography>
+        )}
+        {showStartButton && locationOk && (
+          <NavLink to={"/start"}>
+            <AppButton buttonText={"Start"}></AppButton>
+          </NavLink>
         )}
         <Box mt={2}>
           <LocationCheck onLocationCheck={setLocationOk} />
