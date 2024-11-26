@@ -115,43 +115,62 @@ export const AdminPage = () => {
     return questionArray;
   };
   return (
-    <Box sx={{ marginTop: "32px" }}>
+    <Box
+      sx={{
+        marginTop: "32px",
+        display: "flex",
+        gap: "16px",
+        flexDirection: "column",
+      }}
+    >
       <Typography variant="p">
         Her kan du se statistik for den pågældende dag
       </Typography>
-      <br></br>
-      <br></br>
+
       <CustomSelect
         OptionsArray={classArray}
         callback={setSelectedClass}
         defaultText={"Vælg en klasse"}
       />
-      <br></br>
-      <br></br>
-      {studentData?.map((item) =>
-        item.class == selectedClass ? (
-          <>
-            <Typography variant="h4">{item.class}</Typography>
-            {item.data?.map((item, index) => (
-              <Box key={index} padding={"16px"}>
-                <Typography variant="h5">{item.title}</Typography>
-                {item.data?.map((item) => (
-                  <Box>
-                    {item.id === 1 || item.id === 2 || item.id === 3 ? (
-                      <SvarGraf
-                        data={item.a}
-                        question={item.q}
-                        isbool={false}
-                      />
-                    ) : (
-                      <SvarGraf data={item.a} question={item.q} isbool={true} />
-                    )}
-                  </Box>
-                ))}
-              </Box>
-            ))}
-          </>
-        ) : null
+
+      {studentData?.map(
+        (item, index) =>
+          item.class == selectedClass && (
+            <>
+              <Typography key={index + item.class} variant="h4">
+                {item.class}
+              </Typography>
+              {item.data?.map((item, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "8px",
+                  }}
+                >
+                  <Typography variant="h5">{item.title}</Typography>
+                  {item.data?.map((item, index) => (
+                    <Box key={item.q + index}>
+                      {item.id === 1 || item.id === 2 || item.id === 3 ? (
+                        <SvarGraf
+                          data={item.a}
+                          question={item.q}
+                          isbool={false}
+                        />
+                      ) : (
+                        <SvarGraf
+                          data={item.a}
+                          question={item.q}
+                          isbool={true}
+                        />
+                      )}
+                    </Box>
+                  ))}
+                </Box>
+              ))}
+            </>
+          )
       )}
     </Box>
   );

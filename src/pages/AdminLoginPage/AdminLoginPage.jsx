@@ -93,6 +93,7 @@ export const AdminLoginPage = () => {
             id="outlined-required"
             variant="outlined"
             margin="normal"
+            autoComplete="email"
             value={user}
             onChange={(e) => setUser(e.target.value)}
             sx={{
@@ -114,6 +115,7 @@ export const AdminLoginPage = () => {
             label="Password"
             type="password"
             variant="outlined"
+            autoComplete="current-password"
             margin="normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
