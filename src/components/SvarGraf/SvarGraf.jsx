@@ -96,11 +96,7 @@ export const SvarGraf = ({ data, question, isbool }) => {
   };
 
   return (
-    <Box
-      variant="section"
-      className={styles.container}
-      aria-labelledby="spørgsmål-titel"
-    >
+    <Box className={styles.container} aria-labelledby="spørgsmål-titel">
       {/* Overskrift med spørgsmålet */}
       <Typography variant="h2" id="spørgsmål-titel" className={styles.title}>
         {/*  {spørgsmål} */}
