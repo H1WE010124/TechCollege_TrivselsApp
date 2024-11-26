@@ -1,5 +1,5 @@
 .container {
-  background-color: #ecffed;
+  // background-color: #ecffed;
   padding: 1rem;
   border-radius: 8px;
   text-align: center;
@@ -25,7 +25,7 @@
 .chartWrapper {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: -webkit-fill-available;
 
   canvas {
     width: 100%;
@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  background-color: white;
+  // background-color: white;
   border-radius: 8px;
   margin-top: 1rem;
   padding: 0.5rem;
@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  // background-color: white;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 0.5rem 1rem;

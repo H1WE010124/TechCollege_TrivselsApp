@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "../lib/supabaseClient";
 
-export const useGet = (table) => {
+export const useGet = (table, query) => {
   const { data, isLoading, error } = useQuery({
     queryKey: [table + "_key"],
     queryFn: async () => {
-      const { data, isLoading, error } = await supabase.from(table).select();
+      const { data, isLoading, error } = await supabase
+        .from(table)
+        .select(query ? query : "*");
 
       if (error) {
         throw new Error(`Error ${error}`);

@@ -3,11 +3,11 @@ import styles from "./Landing.module.scss";
 import { NavLink } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
 import { AppButton } from "../../components/AppButton/AppButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LocationCheck } from "/src/helpers/LocationCheck.jsx";
 export function LandingPage() {
-  const [locationOk, setLocationOk] = useState(null); // null = checking, true = location OK, false = location not OK
-  const [showStartButton, setShowStartButton] = useState(false);
+  const [locationOk, setLocationOk] = useState(false); // null = checking, true = location OK, false = location not OK
+  const [showStartButton, setShowStartButton] = useState(true);
   const [countdownText, setCountdownText] = useState("");
 
   // tjek om klok er mellem 12:00 and 14:00
@@ -56,12 +56,6 @@ export function LandingPage() {
 
   return (
     <>
-      <Box className={styles.Admin}>
-        <NavLink to="/login">
-          <AppButton buttonText={"Admin"}></AppButton>
-        </NavLink>
-      </Box>
-
       <Box className={styles.ClockAndStart}>
         <Box
           sx={{
@@ -78,7 +72,6 @@ export function LandingPage() {
         {locationOk === false && (
           <Typography
             sx={{
-              color: "black",
               fontSize: "24px",
               marginTop: "10px",
             }}

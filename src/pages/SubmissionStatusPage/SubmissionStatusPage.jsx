@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./SubmissionStatusPage.module.scss";
 import { Typography, Box, Button, Container } from "@mui/material";
+import { AppButton } from "../../components/AppButton/AppButton";
 
 export const SubmissionStatusPage = ({ status }) => {
   //const [status, setStatus] = useState(null);
@@ -29,21 +30,20 @@ export const SubmissionStatusPage = ({ status }) => {
   }; */
 
   return (
-    <Container className={styles.statusPage}>
+    <Box className={styles.statusPage}>
       {/* Viser succesbesked hvis status er "success" */}
       {status === "success" && (
         <Box
           variant="section"
           className={`${styles.message} ${styles.successMessage}`}
         >
-          <Typography variant="h1">Tak for din deltagelse!</Typography>
+          <Typography variant="h4">Tak for din deltagelse!</Typography>
           <Typography>Din indsendelse er blevet modtaget.</Typography>
-          <Button
-            className={`${styles.button} ${styles.returnButton}`}
-            onClick={() => (window.location.href = "/")}
-          >
-            Tilbage til forsiden
-          </Button>
+          <AppButton
+            // className={`${styles.button} ${styles.returnButton}`}
+            callback={() => (window.location.href = "/")}
+            buttonText={"Tilbage til forsiden"}
+          ></AppButton>
         </Box>
       )}
 
@@ -65,6 +65,6 @@ export const SubmissionStatusPage = ({ status }) => {
           </Button>
         </Box>
       )}
-    </Container>
+    </Box>
   );
 };

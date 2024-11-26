@@ -19,11 +19,9 @@ import { Box, Typography } from "@mui/material";
 // Registrér Chart.js elementer, så de kan bruges til at lave et søjlediagram
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-export const SvarGraf = ({ spørgsmål }) => {
-  const [studentData, setStudentData] = useState(null);
-
+export const SvarGraf = ({ data, question, isbool }) => {
   // Data, der skal vises i søjlediagrammett
-  const testData = [
+  /*  const testData = [
     {
       label: "Dårlig",
       count: 10,
@@ -39,57 +37,44 @@ export const SvarGraf = ({ spørgsmål }) => {
       count: 30,
       icon: <SentimentVerySatisfiedIcon style={{ color: "#388e3c" }} />,
     },
-  ];
-
-  useEffect(() => {
-    const getTodaysData = async () => {
-      const { data, error } = await supabase
-        .from("student_responses")
-        .select("*, students (class_name)")
-        .gt(
-          "created_at",
-          `${new Date().getFullYear()}-${
-            new Date().getMonth() + 1
-          }-${new Date().getDate()}T08:00:32.236853+00:00`
-        );
-
-      if (error) {
-        console.log("Der opstod en fejl:", error);
-        throw new Error(error);
-      } else {
-        let splitData = splitArrayByClass(data);
-        setStudentData(splitData);
-      }
-    };
-
-    getTodaysData();
-  }, []);
-
-  const splitArrayByClass = (array) => {
-    const classArray = ["8U", "8V", "9U", "9V"];
-
-    let c1 = array.filter((item) => item.students.class_name === classArray[0]);
-    let c2 = array.filter((item) => item.students.class_name === classArray[1]);
-    let c3 = array.filter((item) => item.students.class_name === classArray[2]);
-    let c4 = array.filter((item) => item.students.class_name === classArray[3]);
-    return [c1, c2, c3, c4];
-  };
-
-  console.log(studentData);
-
-  // Brugertilstand til at holde styr på, hvilke kommentarer der er åbner
-  const [expandedIndexes, setExpandedIndexes] = useState([]);
+  ]; */
 
   // Dataopsætning til søjlediagrammet
   const chartData = {
-    labels: testData.map(() => ""), // Tøm labels for at undgå tekst under søjlerne
     datasets: [
       {
-        label: "Svarfordeling", // Navn på datasættet (kan vises som tooltip)
-        data: studentData[1]?.map((item) => item.option_id), // Henter `count` fra hvert element i testData til diagrammet
+        data: [data.filter((item) => item === 1).length],
         backgroundColor: "#2E7D32", // Farve på søjlerne
+        label: "Uenig",
+      },
+      {
+        data: [data.filter((item) => item === 2).length],
+        backgroundColor: "#2E7D32", // Farve på søjlerne
+        label: "Neutral",
+      },
+      {
+        data: [data.filter((item) => item === 3).length],
+        backgroundColor: "#2E7D32", // Farve på
+        label: "Enig",
       },
     ],
+    labels: [question.slice(0, 35) + "..."],
+  };
+
+  const chartDataBool = {
+    datasets: [
+      {
+        data: [data.filter((item) => item === 1).length],
+        backgroundColor: "#2E7D32", // Farve på søjlerne
+        label: "Nej",
+      },
+      {
+        data: [data.filter((item) => item === 2).length],
+        backgroundColor: "#2E7D32", // Farve på søjlerne
+        label: "Ja",
+      },
+    ],
+    labels: [question.slice(0, 35) + "..."],
   };
 
   // Diagramindstillinger, f.eks. y-aksens skala og tooltip
@@ -110,13 +95,6 @@ export const SvarGraf = ({ spørgsmål }) => {
     },
   };
 
-  // Funktion til at åbne og lukke kommentar-sektioner
-  const toggleComments = (index) => {
-    setExpandedIndexes((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
-  };
-
   return (
     <Box
       variant="section"
@@ -125,44 +103,13 @@ export const SvarGraf = ({ spørgsmål }) => {
     >
       {/* Overskrift med spørgsmålet */}
       <Typography variant="h2" id="spørgsmål-titel" className={styles.title}>
-        {spørgsmål}
+        {/*  {spørgsmål} */}
       </Typography>
 
       {/* Diagramvisning */}
       <Box className={styles.chartWrapper}>
-        <Bar data={chartData} options={chartOptions} />
-      </Box>
-
-      {/* Kommentar-sektionen, der kan foldes ud */}
-      <Box className={styles.commentSection}>
-        {testData.map((item, index) => (
-          <Box
-            key={index}
-            className={styles.commentToggle}
-            onClick={() => toggleComments(index)}
-          >
-            {/* Viser ikon og antal svar */}
-            <span className={styles.emojiLabel}>
-              {item.icon} {item.count} svar
-            </span>
-            {/* Viser pil, der skifter retning afhængigt af om sektionen er åben eller lukket */}
-            <span>{expandedIndexes.includes(index) ? "▲" : "▼"}</span>
-            {/* Hvis sektionen er åben, vises kommentarer her */}
-            {expandedIndexes.includes(index) && (
-              <ul className={styles.commentList}>
-                {item.comments?.map((comment, i) => (
-                  <li key={i}>{comment}</li>
-                ))}
-              </ul>
-            )}
-          </Box>
-        ))}
+        <Bar data={isbool ? chartDataBool : chartData} options={chartOptions} />
       </Box>
     </Box>
   );
-};
-
-// Validering af komponentens prop-typerr
-SvarGraf.propTypes = {
-  spørgsmål: PropTypes.string.isRequired,
 };

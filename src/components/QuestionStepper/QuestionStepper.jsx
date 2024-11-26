@@ -9,8 +9,6 @@ export const QuestionStepper = ({
   setCurrentStep,
   backAction,
 }) => {
-  const theme = useTheme();
-
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
   };
@@ -25,6 +23,7 @@ export const QuestionStepper = ({
       variant="progress"
       steps={totalSteps}
       position={"static"}
+      sx={{ width: "100%;" }}
       activeStep={currentStep}
       nextButton={
         <Button
