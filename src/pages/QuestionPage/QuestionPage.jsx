@@ -100,7 +100,14 @@ export const QuestionPage = () => {
   }, [selectedClass]);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {studentError && studentError.code === "23505" ? (
         <>
           <Typography variant="h4">
@@ -115,10 +122,15 @@ export const QuestionPage = () => {
         <SubmissionStatusPage status={"success"} />
       ) : selectedClass === null ? (
         <>
-          <Typography variant="h4" sx={{
-            fontSize: { xs: "2.5rem", md: "3.5rem" }, 
-            color: "#2E7D32"
-          }}>Velkommen</Typography>
+          <Typography
+            variant="h4"
+            sx={{
+              fontSize: { xs: "2.5rem", md: "3.5rem" },
+              color: "#2E7D32",
+            }}
+          >
+            Velkommen
+          </Typography>
           <br></br>
           <CustomSelect
             OptionsArray={["8U", "8V", "9U", "9V"]}
@@ -127,14 +139,18 @@ export const QuestionPage = () => {
           />
         </>
       ) : subSelect === null ? (
-        <QuestionCard currentQuestionIndex={0} totalQuestions={1}  >
-          <Typography variant="h4" sx={{fontSize:{lg:"2.8rem", xs:"2rem"}, padding:"32px"}}>Har i dag været en god dag?</Typography>
+        <QuestionCard currentQuestionIndex={0} totalQuestions={1}>
+          <Typography
+            variant="h4"
+            sx={{ fontSize: { lg: "2.4rem", xs: "1.8rem" }, padding: "16px" }}
+          >
+            Har i dag været en god dag?
+          </Typography>
           <Box display={"flex"} justifyContent={"space-evenly"}>
             <IconButton
               callback={() => setSubSelect(0)}
               styling="yesnoButtons"
               value="0"
-              
             >
               <ThumbDownIcon style={{ fill: "#2E7D32" }} />
             </IconButton>

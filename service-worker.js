@@ -2,54 +2,57 @@ const staticCache = 'static-cache-v1';
 const dynamicCacheName = 'dynamic-cache-v1';
 
 const assets = [
-    '/index.html',
-    '/fallback.html',
+
+    'index.html',
+    'fallback.html',
 ];
 
-// Installations-event: Tilføj statiske assets til cache
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(staticCache).then(cache => {
+            console.log('Caching følgende filer:', assets);
             return cache.addAll(assets);
         }).catch(error => {
-            console.error('Fejl ved tilføjelse til statisk cache:', error);
+            console.error('Fejl ved caching af filer:', error);
         })
     );
 });
 
-// Aktiverings-event: Slet gammel cache, der ikke matcher `staticCache`
 self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then(keys => {
-            return Promise.all(
-                keys
-                    .filter(key => key !== staticCache && key !== dynamicCacheName)
+        caches.keys().then(keys =>
+            Promise.all(
+                keys.filter(key => key !== staticCache && key !== dynamicCacheName)
                     .map(key => caches.delete(key))
-            );
-        })
+            )
+        )
     );
-    // Tager kontrol over alle åbne klienter med den nye service worker
+    console.log('Service worker aktiveret og gammel cache ryddet.');
     return self.clients.claim();
 });
 
-// Fetch-event: Network-first caching-strategi
 self.addEventListener('fetch', event => {
-    // Tjekker om forespørgslen er HTTP/HTTPS
     if (!(event.request.url.startsWith('http'))) return;
 
     event.respondWith(
         fetch(event.request)
             .then(fetchRes => {
-                // Hvis vi får et netværkssvar, cache det dynamisk og returner det
                 return caches.open(dynamicCacheName).then(cache => {
-                    cache.put(event.request, fetchRes.clone()); // Tilføj svaret til cache
-                    return fetchRes; // Returner netværkssvaret
+                    cache.put(event.request, fetchRes.clone());
+                    console.log('Dynamisk caching af:', event.request.url);
+                    return fetchRes;
                 });
             })
             .catch(() => {
-                // Hvis netværket fejler, prøv at returnere fra cachen
+                console.warn('Netværk fejlede. Tjekker cache for:', event.request.url);
                 return caches.match(event.request).then(cacheRes => {
-                    return cacheRes || caches.match('/fallback.html'); // Fallback til en offline-side
+                    if (cacheRes) {
+                        console.log('Serving fra cache:', event.request.url);
+                        return cacheRes;
+                    } else if (event.request.mode === 'navigate') {
+                        console.log('Serving fallback.html som offline fallback');
+                        return caches.match('/fallback.html');
+                    }
                 });
             })
     );

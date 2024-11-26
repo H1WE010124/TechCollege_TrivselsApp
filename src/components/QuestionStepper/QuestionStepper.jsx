@@ -1,5 +1,4 @@
-import { Button } from "@mui/material";
-import MobileStepper from "@mui/material/MobileStepper";
+import { Button, MobileStepper } from "@mui/material";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
@@ -10,8 +9,6 @@ export const QuestionStepper = ({
   setCurrentStep,
   backAction,
 }) => {
-  const theme = useTheme();
-
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
   };
@@ -26,6 +23,7 @@ export const QuestionStepper = ({
       variant="progress"
       steps={totalSteps}
       position={"static"}
+      sx={{ width: "100%;" }}
       activeStep={currentStep}
       nextButton={
         <Button

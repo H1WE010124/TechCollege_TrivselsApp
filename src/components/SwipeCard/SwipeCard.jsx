@@ -3,7 +3,7 @@ import style from "./SwipeCard.module.scss";
 import TinderCard from "react-tinder-card";
 import { QuestionCard } from "../QuestionCard/QuestionCard";
 import { YesNo } from "../YesNo/YesNo";
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery, Box, Typography } from "@mui/material";
 
 export const SwipeCard = ({
   array,
@@ -30,7 +30,7 @@ export const SwipeCard = ({
           currentQuestionIndex={currentQuestionIndex}
           totalQuestions={array?.length}
         >
-          <p>{question}</p>
+          <Typography>{question}</Typography>
           <YesNo
             callback={callback}
             array={array}
@@ -40,7 +40,7 @@ export const SwipeCard = ({
       )}
 
       {!isDesktop && (
-        <div className={style.cardContainer}>
+        <Box className={style.cardContainer}>
           {array &&
             array
               .slice()
@@ -52,22 +52,22 @@ export const SwipeCard = ({
                   preventSwipe={["up", "down"]}
                   onSwipe={onSwipe}
                 >
-                  <div className={style.swipeCard}>
+                  <Box className={style.swipeCard}>
                     <QuestionCard
                       currentQuestionIndex={currentQuestionIndex}
                       totalQuestions={array.length}
                     >
-                      <p>{question}</p>
+                      <Typography>{question}</Typography>
                       <YesNo
                         callback={callback}
                         array={array}
                         currentIndex={currentQuestionIndex}
                       />
                     </QuestionCard>
-                  </div>
+                  </Box>
                 </TinderCard>
               ))}
-        </div>
+        </Box>
       )}
     </>
   );
