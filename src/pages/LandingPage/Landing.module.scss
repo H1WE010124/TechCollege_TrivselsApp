@@ -4,7 +4,7 @@ $secondary-color: #2e7d32;
 * {
   padding: 0;
   margin: 0;
-  box-sizing: none;
+  box-sizing: border-box;
   //overflow:hidden;
 }
 
@@ -45,7 +45,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  // height: 100vh;
 
   .CountdownText {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
