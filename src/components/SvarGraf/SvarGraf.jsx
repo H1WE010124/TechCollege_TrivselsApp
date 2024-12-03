@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,10 +8,6 @@ import {
   Legend,
 } from "chart.js";
 import styles from "./SvarGraf.module.scss";
-import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
-import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
-import { supabase } from "../../lib/supabaseClient";
 import { Box, Typography } from "@mui/material";
 
 // Registrér Chart.js elementer, så de kan bruges til at lave et søjlediagram
@@ -44,28 +38,28 @@ export const SvarGraf = ({ data, question, isbool }) => {
     datasets: [
       {
         data: [data.filter((item) => item === 1).length],
-        backgroundColor: "#2E7D32", // Farve på søjlerne
+        backgroundColor: "#ee2400", // Farve på søjlerne
         label: "Uenig",
       },
       {
         data: [data.filter((item) => item === 2).length],
-        backgroundColor: "#2E7D32", // Farve på søjlerne
+        backgroundColor: "#ffd966", // Farve på søjlerne
         label: "Neutral",
       },
       {
         data: [data.filter((item) => item === 3).length],
-        backgroundColor: "#2E7D32", // Farve på
+        backgroundColor: "#2e7d32", // Farve på
         label: "Enig",
       },
     ],
-    labels: [question.slice(0, 35) + "..."],
+    labels: [question],
   };
 
   const chartDataBool = {
     datasets: [
       {
         data: [data.filter((item) => item === 1).length],
-        backgroundColor: "#2E7D32", // Farve på søjlerne
+        backgroundColor: "#ee2400", // Farve på søjlerne
         label: "Nej",
       },
       {
@@ -74,19 +68,19 @@ export const SvarGraf = ({ data, question, isbool }) => {
         label: "Ja",
       },
     ],
-    labels: [question.slice(0, 35) + "..."],
+    labels: [question],
   };
 
   // Diagramindstillinger, f.eks. y-aksens skala og tooltip
   const chartOptions = {
     plugins: {
-      legend: { display: false }, // Skjuler legend, da den ikke er nødvendig
+      legend: { display: true }, // Skjuler legend, da den ikke er nødvendig
       tooltip: { enabled: true }, // Aktiverer værktøjstip (tooltip) på hover
     },
     scales: {
       y: {
         beginAtZero: true, // Starter y-aksen fra 0
-        max: 20, // Maksimumværdi på y-aksen
+        max: 30, // Maksimumværdi på y-aksen
         ticks: {
           stepSize: 1, // Afstand mellem y-aksens markeringer
           callback: (value) => ([0, 5, 10, 15].includes(value) ? value : null), // Viser kun disse værdier
