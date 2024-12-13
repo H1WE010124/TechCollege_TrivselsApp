@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 import { Typography, Box } from "@mui/material";
 import { AppButton } from "../../components/AppButton/AppButton";
 import { useState, useEffect } from "react";
-import { LocationCheck } from "/src/helpers/LocationCheck.jsx";
+// import { LocationCheck } from "/src/helpers/LocationCheck.jsx";
 export function LandingPage() {
-  const [locationOk, setLocationOk] = useState(false); // null = checking, true = location OK, false = location not OK
+  // const [locationOk, setLocationOk] = useState(false); // null = checking, true = location OK, false = location not OK
   const [showStartButton, setShowStartButton] = useState(true);
   const [countdownText, setCountdownText] = useState("");
 
@@ -66,10 +66,10 @@ export function LandingPage() {
         >
           <Clock />
         </Box>
-        {locationOk === true && !showStartButton && (
+        {!showStartButton && (
           <Box className={styles.CountdownText}>{countdownText}</Box>
         )}
-        {locationOk === false && (
+        {/* {locationOk === false && (
           <Typography
             sx={{
               fontSize: "24px",
@@ -78,15 +78,15 @@ export function LandingPage() {
           >
             Du skal være på skolen for at tilgå meningsmålingen
           </Typography>
-        )}
-        {showStartButton && locationOk && (
+        )} */}
+        {showStartButton && (
           <NavLink to={"/start"}>
             <AppButton buttonText={"Start"}></AppButton>
           </NavLink>
         )}
-        <Box mt={2}>
+        {/*  <Box mt={2}>
           <LocationCheck onLocationCheck={setLocationOk} />
-        </Box>
+        </Box> */}
       </Box>
     </>
   );
